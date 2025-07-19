@@ -1,9 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Organic Chemistry Survivor</title>
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1335069074488819824/1396033973498544309/Messenger_creation_46D3A901-FE1F-442B-9273-977B711F01C0.jpg?ex=687c9d74&is=687b4bf4&hm=6727fbbfa110a77f0aa5c12cf7a71e3d8767e6a40ce85b3580b9ce6a8b5c1d6f&" type="image/png" />
+
+    <!-- พื้นหลัง particle -->
+    <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
+
+    <!-- โหลดไลบรารี -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+        // ตั้งค่า particles
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#00c3ff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5 },
+                "size": { "value": 4 },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00c3ff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,10 +62,10 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #f0f4f8;
+            background-color: black;
         }
         #game-container {
-            background-color: #fff;
+            background-color: #c4c4c4;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -44,6 +94,52 @@
         }
         button:hover {
             background-color: #2980b9;
+        }
+        .button1 {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .button1:hover {
+            background-color: #00ff40;
+            color: black;
+        }
+        .button2:hover {
+            background-color: #0051ff;
+            color: black;
+        }
+        .button3 {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .button3:hover {
+            background-color: #500049;
+            color: black;
+        }
+        .button4 {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .button4:hover {
+            background-color: #ff0000;
+            color: black;
         }
         #question-text {
             font-size: 1.2em;
@@ -79,7 +175,7 @@
 <body>
     <div id="game-container">
         <div id="click-play-screen" class="active">
-            <h1>ยินดีต้องรับสู่ Organic Chemistry Survivor 🧪 V 0.1</h1>
+            <h1>Organic Chemistry Survivor 🧪</h1>
             <p>ออกเดินทางสู่ดินแดนรกร้างทางเคมี! ตอบคำถามเคมีอินทรีย์เพื่อรวบรวมทรัพยากรและเอาชีวิตรอด ทดสอบความรู้ของคุณและก้าวสู่การเป็นปรมาจารย์ด้านเคมี!</p>
             <button onclick="showStartScreen()">เริ่มเกม </button>
         </div>
@@ -87,10 +183,10 @@
             <h1>Organic Chemistry Survivor 🧪</h1>
             <p>ตอบคำถามเพื่อเอาชีวิตรอดในดินแดนรกร้างทางเคมี!</p>
             <p>เลือกจำนวนข้อ ที่คุณอยากจะเล่น:</p>
-            <button onclick="startGame(5)">5 คำถาม</button>
-            <button onclick="startGame(10)">10 คำถาม</button>
-            <button onclick="startGame(20)">20 คำถาม</button>
-            <button onclick="startGame(30)">30 คำถาม</button>
+            <button class="button1" title="Easy" onclick="startGame(5)">5 คำถาม</button>
+            <button class="button2" title="Normal" onclick="startGame(10)">10 คำถาม</button>
+            <button class="button3" title="Difficult" onclick="startGame(20)">20 คำถาม</button>
+            <button class="button4" title="very difficult" onclick="startGame(30)">30 คำถาม</button>
         </div>
         <div id="game-screen">
             <div id="score">คะแนน : 0</div>
@@ -107,6 +203,22 @@
         </div>
     </div>
 
+    <footer style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 0.9em;
+    color: #c2c2c2;
+    box-shadow: 0 -1px 5px rgba(0,0,0,0.1);
+    z-index: 999;
+">
+    &copy; 2025 Organic Chemistry Survivor By Wichian M603/68. Designed for educational use only.
+</footer>
+
     <script>
         // Game state variables
         let score = 0;
@@ -115,160 +227,161 @@
         let currentQuestion = 0;
         let totalQuestions = 0;
         let questions = [];
+        let gameFinishedNaturally = false; // ตัวแปรสถานะว่าเล่นจบครบหรือพลังหมด
 
         // Sample organic chemistry questions
         const questionBank = [
-    {
-        question: "หมู่ฟังก์ชันในแอลกอฮอล์คืออะไร?",
-        choices: ["-OH", "-COOH", "-NH2", "-CHO"],
-        answer: "-OH"
-    },
-    {
-        question: "สูตรทั่วไปของแอลเคนคืออะไร?",
-        choices: ["CnH2n+2", "CnH2n", "CnH2n-2", "CnHn"],
-        answer: "CnH2n+2"
-    },
-    {
-        question: "สารประกอบใดเป็นตัวอย่างของคีโตน?",
-        choices: ["Ethanol", "Acetone", "Acetic acid", "Ethene"],
-        answer: "Acetone"
-    },
-    {
-        question: "พันธะประเภทใดที่เกิดขึ้นในแอลคีน?",
-        choices: ["Single bond", "Double bond", "Triple bond", "Ionic bond"],
-        answer: "Double bond"
-    },
-    {
-        question: "ชื่อ IUPAC ของ CH3CH2OH คืออะไร?",
-        choices: ["Methanol", "Ethanol", "Propanol", "Butanol"],
-        answer: "Ethanol"
-    },
-    {
-        question: "หมู่ฟังก์ชันของกรดคาร์บอกซิลิกคืออะไร?",
-        choices: ["-COOH", "-OH", "-NH2", "-CHO"],
-        answer: "-COOH"
-    },
-    {
-        question: "สารประกอบใดเป็นแอลคีน?",
-        choices: ["Ethene", "Ethane", "Ethyne", "Methanol"],
-        answer: "Ethene"
-    },
-    {
-        question: "แอลไฮด์มีหมู่ฟังก์ชันใด?",
-        choices: ["-CHO", "-COOH", "-OH", "-COO-"],
-        answer: "-CHO"
-    },
-    {
-        question: "ชื่อ IUPAC ของ CH3COOH คืออะไร?",
-        choices: ["Acetic acid", "Methanoic acid", "Propanoic acid", "Formic acid"],
-        answer: "Acetic acid"
-    },
-    {
-        question: "หมู่ฟังก์ชันของเอมีนคืออะไร?",
-        choices: ["-NH2", "-OH", "-COOH", "-C≡N"],
-        answer: "-NH2"
-    },
-    {
-        question: "สารใดต่อไปนี้เป็นไฮโดรคาร์บอนอิ่มตัว?",
-        choices: ["Methane", "Ethene", "Propyne", "Benzene"],
-        answer: "Methane"
-    },
-    {
-        question: "พันธะสามพบในสารใด?",
-        choices: ["Alkyne", "Alkene", "Alkane", "Alcohol"],
-        answer: "Alkyne"
-    },
-    {
-        question: "กลุ่มเอสเตอร์มีโครงสร้างพื้นฐานอย่างไร?",
-        choices: ["RCOOR'", "ROH", "RNH2", "RCOOH"],
-        answer: "RCOOR'"
-    },
-    {
-        question: "แอลกอฮอล์สามารถเปลี่ยนเป็นแอลดีไฮด์ได้ด้วยกระบวนการใด?",
-        choices: ["Oxidation", "Reduction", "Hydrolysis", "Condensation"],
-        answer: "Oxidation"
-    },
-    {
-        question: "เบนซีนจัดเป็นสารใด?",
-        choices: ["อะโรมาติก", "แอลเคน", "แอลคีน", "แอลไคน์"],
-        answer: "อะโรมาติก"
-    },
-    {
-        question: "สูตรโมเลกุลของเมทานอลคืออะไร?",
-        choices: ["CH3OH", "C2H5OH", "CH4O2", "CH3COOH"],
-        answer: "CH3OH"
-    },
-    {
-        question: "โครงสร้างของกรดฟอร์มิกคืออะไร?",
-        choices: ["HCOOH", "CH3COOH", "C2H5OH", "CH3NH2"],
-        answer: "HCOOH"
-    },
-    {
-        question: "หมู่ฟังก์ชันของเอไมด์คืออะไร?",
-        choices: ["-CONH2", "-NH2", "-COOH", "-OH"],
-        answer: "-CONH2"
-    },
-    {
-        question: "แอลกอฮอล์ใดที่มีคาร์บอนมากที่สุด?",
-        choices: ["Butanol", "Ethanol", "Methanol", "Propanol"],
-        answer: "Butanol"
-    },
-    {
-        question: "หมู่ฟังก์ชันใดพบในสารที่มีกลิ่นผลไม้?",
-        choices: ["เอสเตอร์", "แอลกอฮอล์", "คีโตน", "แอลไฮด์"],
-        answer: "เอสเตอร์"
-    },
-    {
-        question: "ชื่อ IUPAC ของ HCHO คืออะไร?",
-        choices: ["Methanal", "Ethanol", "Methanol", "Formic acid"],
-        answer: "Methanal"
-    },
-    {
-        question: "สารที่มีหมู่คาร์บอกซิลิกจะมีสมบัติอย่างไร?",
-        choices: ["เป็นกรด", "เป็นด่าง", "เป็นกลาง", "เป็นเบสอ่อน"],
-        answer: "เป็นกรด"
-    },
-    {
-        question: "แอลเคนไม่มีปฏิกิริยาใด?",
-        choices: ["Addition", "Combustion", "Substitution", "Cracking"],
-        answer: "Addition"
-    },
-    {
-        question: "สารที่มีหมู่ -OH จะสามารถทำปฏิกิริยาใดได้?",
-        choices: ["Dehydration", "Hydrogenation", "Hydrolysis", "Substitution"],
-        answer: "Dehydration"
-    },
-    {
-        question: "โพรเพนมีสูตรเคมีคืออะไร?",
-        choices: ["C3H8", "C2H6", "C3H6", "C4H10"],
-        answer: "C3H8"
-    },
-    {
-        question: "หมู่ฟังก์ชัน -C≡N คือหมู่ของสารประเภทใด?",
-        choices: ["ไนไตรล์", "แอลไฮด์", "เอไมด์", "แอลกอฮอล์"],
-        answer: "ไนไตรล์"
-    },
-    {
-        question: "สมบัติของเอมีนมักมีลักษณะใด?",
-        choices: ["มีกลิ่นเหม็นคล้ายปลา", "เป็นกรดแรง", "ไม่มีขั้ว", "ละลายน้ำไม่ได้"],
-        answer: "มีกลิ่นเหม็นคล้ายปลา"
-    },
-    {
-        question: "สารอินทรีย์คืออะไร?",
-        choices: ["สารที่มีคาร์บอนเป็นองค์ประกอบหลัก", "สารที่มีออกซิเจนเท่านั้น", "สารที่มีไฮโดรเจน", "สารอนินทรีย์ทั้งหมด"],
-        answer: "สารที่มีคาร์บอนเป็นองค์ประกอบหลัก"
-    },
-    {
-        question: "กระบวนการเปลี่ยนแอลกอฮอล์เป็นเอสเตอร์เรียกว่าอะไร?",
-        choices: ["Esterification", "Neutralization", "Hydrolysis", "Oxidation"],
-        answer: "Esterification"
-    },
-    {
-        question: "สารใดเป็นตัวอย่างของแอลไคน์?",
-        choices: ["Ethyne", "Ethane", "Ethene", "Methanol"],
-        answer: "Ethyne"
-    }
-];
+            {
+                question: "หมู่ฟังก์ชันในแอลกอฮอล์คืออะไร?",
+                choices: ["-OH", "-COOH", "-NH2", "-CHO"],
+                answer: "-OH"
+            },
+            {
+                question: "สูตรทั่วไปของแอลเคนคืออะไร?",
+                choices: ["CnH2n+2", "CnH2n", "CnH2n-2", "CnHn"],
+                answer: "CnH2n+2"
+            },
+            {
+                question: "สารประกอบใดเป็นตัวอย่างของคีโตน?",
+                choices: ["Ethanol", "Acetone", "Acetic acid", "Ethene"],
+                answer: "Acetone"
+            },
+            {
+                question: "พันธะประเภทใดที่เกิดขึ้นในแอลคีน?",
+                choices: ["Single bond", "Double bond", "Triple bond", "Ionic bond"],
+                answer: "Double bond"
+            },
+            {
+                question: "ชื่อ IUPAC ของ CH3CH2OH คืออะไร?",
+                choices: ["Methanol", "Ethanol", "Propanol", "Butanol"],
+                answer: "Ethanol"
+            },
+            {
+                question: "หมู่ฟังก์ชันของกรดคาร์บอกซิลิกคืออะไร?",
+                choices: ["-OH", "-COOH", "-NH2", "-CHO"],
+                answer: "-COOH"
+            },
+            {
+                question: "สารประกอบใดเป็นแอลคีน?",
+                choices: ["Ethene", "Ethane", "Ethyne", "Methanol"],
+                answer: "Ethene"
+            },
+            {
+                question: "แอลไฮด์มีหมู่ฟังก์ชันใด?",
+                choices: ["-CHO", "-COOH", "-OH", "-COO-"],
+                answer: "-CHO"
+            },
+            {
+                question: "ชื่อ IUPAC ของ CH3COOH คืออะไร?",
+                choices: ["Methanoic acid", "Propanoic acid", "Formic acid", "Acetic acid"],
+                answer: "Acetic acid"
+            },
+            {
+                question: "หมู่ฟังก์ชันของเอมีนคืออะไร?",
+                choices: ["-OH", "-COOH", "-C≡N", "-NH2",],
+                answer: "-NH2"
+            },
+            {
+                question: "สารใดต่อไปนี้เป็นไฮโดรคาร์บอนอิ่มตัว?",
+                choices: ["Ethene", "Propyne", "Benzene", "Methane"],
+                answer: "Methane"
+            },
+            {
+                question: "พันธะสามพบในสารใด?",
+                choices: ["Alkene", "Alkane", "Alcohol", "Alkyne",],
+                answer: "Alkyne"
+            },
+            {
+                question: "กลุ่มเอสเตอร์มีโครงสร้างพื้นฐานอย่างไร?",
+                choices: ["ROH", "RCOOR'", "RNH2", "RCOOH"],
+                answer: "RCOOR'"
+            },
+            {
+                question: "แอลกอฮอล์สามารถเปลี่ยนเป็นแอลดีไฮด์ได้ด้วยกระบวนการใด?",
+                choices: ["Oxidation", "Reduction", "Hydrolysis", "Condensation"],
+                answer: "Oxidation"
+            },
+            {
+                question: "เบนซีนจัดเป็นสารใด?",
+                choices: ["แอลเคน", "แอลคีน", "อะโรมาติก", "แอลไคน์"],
+                answer: "อะโรมาติก"
+            },
+            {
+                question: "สูตรโมเลกุลของเมทานอลคืออะไร?",
+                choices: ["C2H5OH", "CH3OH", "CH4O2", "CH3COOH"],
+                answer: "CH3OH"
+            },
+            {
+                question: "โครงสร้างของกรดฟอร์มิกคืออะไร?",
+                choices: ["CH3COOH", "HCOOH", "C2H5OH", "CH3NH2"],
+                answer: "HCOOH"
+            },
+            {
+                question: "หมู่ฟังก์ชันของเอไมด์คืออะไร?",
+                choices: ["-NH2", "-COOH", "-OH", "-CONH2"],
+                answer: "-CONH2"
+            },
+            {
+                question: "แอลกอฮอล์ใดที่มีคาร์บอนมากที่สุด?",
+                choices: ["Butanol", "Ethanol", "Methanol", "Propanol"],
+                answer: "Butanol"
+            },
+            {
+                question: "หมู่ฟังก์ชันใดพบในสารที่มีกลิ่นผลไม้?",
+                choices: ["แอลกอฮอล์", "คีโตน", "เอสเตอร์", "แอลไฮด์"],
+                answer: "เอสเตอร์"
+            },
+            {
+                question: "ชื่อ IUPAC ของ HCHO คืออะไร?",
+                choices: ["Ethanol", "Methanol", "Methanal", "Formic acid"],
+                answer: "Methanal"
+            },
+            {
+                question: "สารที่มีหมู่คาร์บอกซิลิกจะมีสมบัติอย่างไร?",
+                choices: ["เป็นด่าง", "เป็นกลาง", "เป็นกรด", "เป็นเบสอ่อน"],
+                answer: "เป็นกรด"
+            },
+            {
+                question: "แอลเคนไม่มีปฏิกิริยาใด?",
+                choices: ["Combustion", "Addition", "Substitution", "Cracking"],
+                answer: "Addition"
+            },
+            {
+                question: "สารที่มีหมู่ -OH จะสามารถทำปฏิกิริยาใดได้?",
+                choices: ["Dehydration", "Hydrogenation", "Hydrolysis", "Substitution"],
+                answer: "Dehydration"
+            },
+            {
+                question: "โพรเพนมีสูตรเคมีคืออะไร?",
+                choices: ["C2H6", "C3H6", "C4H10", "C3H8"],
+                answer: "C3H8"
+            },
+            {
+                question: "หมู่ฟังก์ชัน -C≡N คือหมู่ของสารประเภทใด?",
+                choices: ["แอลไฮด์","ไนไตรล์", "เอไมด์", "แอลกอฮอล์"],
+                answer: "ไนไตรล์"
+            },
+            {
+                question: "สมบัติของเอมีนมักมีลักษณะใด?",
+                choices: ["เป็นกรดแรง", "ไม่มีขั้ว","มีกลิ่นเหม็นคล้ายปลา", "ละลายน้ำไม่ได้"],
+                answer: "มีกลิ่นเหม็นคล้ายปลา"
+            },
+            {
+                question: "สารอินทรีย์คืออะไร?",
+                choices: ["สารที่มีคาร์บอนเป็นองค์ประกอบหลัก", "สารที่มีออกซิเจนเท่านั้น", "สารที่มีไฮโดรเจน", "สารอนินทรีย์ทั้งหมด"],
+                answer: "สารที่มีคาร์บอนเป็นองค์ประกอบหลัก"
+            },
+            {
+                question: "กระบวนการเปลี่ยนแอลกอฮอล์เป็นเอสเตอร์เรียกว่าอะไร?",
+                choices: ["Neutralization", "Hydrolysis", "Oxidation", "Esterification"],
+                answer: "Esterification"
+            },
+            {
+                question: "สารใดเป็นตัวอย่างของแอลไคน์?",
+                choices: ["Ethyne", "Ethane", "Ethene", "Methanol"],
+                answer: "Ethyne"
+            }
+        ];
 
         // Show the start screen (question selection)
         function showStartScreen() {
@@ -283,6 +396,7 @@
             health = 100;
             currentQuestion = 0;
             questions = shuffleArray(questionBank).slice(0, numQuestions);
+            gameFinishedNaturally = false; // รีเซ็ตสถานะ
             document.getElementById('start-screen').classList.remove('active');
             document.getElementById('game-screen').classList.add('active');
             document.getElementById('score').textContent = `คะแนน : ${score}`;
@@ -301,10 +415,20 @@
 
         // Display the current question
         function showQuestion() {
-            if (currentQuestion >= totalQuestions || health <= 0) {
+            if (health <= 0) {
+                // ถ้าพลังชีวิตหมดก่อนจบ ให้เกมจบทันที แต่สถานะไม่ใช่ "เล่นจบครบ"
+                gameFinishedNaturally = false;
                 endGame();
                 return;
             }
+
+            if (currentQuestion >= totalQuestions) {
+                // เล่นครบคำถามครบแล้ว ถือว่าเล่นจบครบ
+                gameFinishedNaturally = true;
+                endGame();
+                return;
+            }
+
             const q = questions[currentQuestion];
             document.getElementById('question-text').textContent = q.question;
             const choicesDiv = document.getElementById('choices');
@@ -317,13 +441,14 @@
             });
         }
 
-        // Check the player's answer
+
         function checkAnswer(selected, correct) {
             if (selected === correct) {
                 score += 100;
                 document.getElementById('score').textContent = `คะแนน : ${score}`;
             } else {
                 health -= 20;
+                if (health < 0) health = 0;
                 document.getElementById('health').style.width = `${health}%`;
             }
             currentQuestion++;
@@ -331,16 +456,29 @@
         }
 
         // End the game and show results
-        function endGame() {
-            document.getElementById('game-screen').classList.remove('active');
-            document.getElementById('end-screen').classList.add('active');
-            document.getElementById('final-score').textContent = `Final Score: ${score}`;
-            if (score > highScore) {
-                highScore = score;
-                localStorage.setItem('highScore', highScore);
-            }
-            document.getElementById('high-score-end').textContent = `High Score: ${highScore}`;
-        }
+function endGame() {
+    document.getElementById('game-screen').classList.remove('active');
+    document.getElementById('end-screen').classList.add('active');
+
+    const requiredScore = totalQuestions * 100;
+
+    // ชนะ = เล่นครบ + คะแนนถึงเกณฑ์
+    if (gameFinishedNaturally && score >= requiredScore) {
+        document.getElementById('final-score').textContent = `คุณชนะ! คะแนนสุดท้าย: ${score}`;
+        document.querySelector('#end-screen h1').textContent = "You Win! 🎉";
+    } else {
+        // แพ้ถ้าเล่นไม่ครบ หรือคะแนนไม่ถึง
+        document.getElementById('final-score').textContent = `Game Over! คะแนนสุดท้าย: ${score}`;
+        document.querySelector('#end-screen h1').textContent = "Game Over 🧪";
+    }
+
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore', highScore);
+    }
+
+    document.getElementById('high-score-end').textContent = `High Score: ${highScore}`;
+}
 
         // Restart the game
         function restartGame() {
