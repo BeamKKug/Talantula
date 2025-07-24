@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Organic Chemistry Survivor</title>
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/1335069074488819824/1396033973498544309/Messenger_creation_46D3A901-FE1F-442B-9273-977B711F01C0.jpg?ex=687c9d74&is=687b4bf4&hm=6727fbbfa110a77f0aa5c12cf7a71e3d8767e6a40ce85b3580b9ce6a8b5c1d6f&" type="image/png" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://cdn.discordapp.com/attachments/1335069074488819824/1396033973498544309/Messenger_creation_46D3A901-FE1F-442B-9273-977B711F01C0.jpg?ex=68828c34&is=68813ab4&hm=6cab96c323b6f102959c1cb52505de1d92864d22ad375f2d72d0ea2f56491906&" type="image/png" />
+
+
+    <div id="logoBar">
+        <a href="home.html">
+            <img src="https://cdn.discordapp.com/attachments/1335069074488819824/1396033973498544309/Messenger_creation_46D3A901-FE1F-442B-9273-977B711F01C0.jpg?ex=68828c34&is=68813ab4&hm=6cab96c323b6f102959c1cb52505de1d92864d22ad375f2d72d0ea2f56491906&" alt="Logo" id="logo">
+        </a>
+        <a id="tl-logo" href="home.html">OrganicChemistrySurvivor</a>
+    </div>
+
 
     <!-- พื้นหลัง particle -->
     <div id="particles-js" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
@@ -94,6 +104,8 @@
         }
         button:hover {
             background-color: #2980b9;
+            transform: scale(1.05);
+            transition: transform 0.2s ease;
         }
         .button1 {
             background-color: #3498db;
@@ -108,10 +120,12 @@
         .button1:hover {
             background-color: #00ff40;
             color: black;
+            transform: scale(1.05);
         }
         .button2:hover {
             background-color: #0051ff;
             color: black;
+            transform: scale(1.05);
         }
         .button3 {
             background-color: #3498db;
@@ -126,6 +140,7 @@
         .button3:hover {
             background-color: #500049;
             color: black;
+            transform: scale(1.05);
         }
         .button4 {
             background-color: #3498db;
@@ -140,6 +155,7 @@
         .button4:hover {
             background-color: #ff0000;
             color: black;
+            transform: scale(1.05);
         }
         #question-text {
             font-size: 1.2em;
@@ -173,15 +189,18 @@
     </style>
 </head>
 <body>
+
     <div id="game-container">
         <div id="click-play-screen" class="active">
             <h1>Organic Chemistry Survivor 🧪</h1>
-            <p>ออกเดินทางสู่ดินแดนรกร้างทางเคมี! ตอบคำถามเคมีอินทรีย์เพื่อรวบรวมทรัพยากรและเอาชีวิตรอด ทดสอบความรู้ของคุณและก้าวสู่การเป็นปรมาจารย์ด้านเคมี!</p>
+            <p>ออกเดินทางสู่ดินแดนแห่งทางเคมี! ตอบคำถามเคมีอินทรีย์เพื่อรวบรวมคะแนนและเอาชีวิตรอด ทดสอบความรู้ของคุณและก้าวสู่การเป็นปรมาจารย์ด้านเคมี!</p>
             <button onclick="showStartScreen()">เริ่มเกม </button>
         </div>
         <div id="start-screen">
             <h1>Organic Chemistry Survivor 🧪</h1>
             <p>ตอบคำถามเพื่อเอาชีวิตรอดในดินแดนรกร้างทางเคมี!</p>
+            
+
             <p>เลือกจำนวนข้อ ที่คุณอยากจะเล่น:</p>
             <button class="button1" title="Easy" onclick="startGame(5)">5 คำถาม</button>
             <button class="button2" title="Normal" onclick="startGame(10)">10 คำถาม</button>
@@ -203,6 +222,7 @@
         </div>
     </div>
 
+
     <footer style="
     position: fixed;
     bottom: 0;
@@ -218,6 +238,7 @@
 ">
     &copy; 2025 Organic Chemistry Survivor By Wichian M603/68. Designed for educational use only.
 </footer>
+
 
     <script>
         // Game state variables
@@ -455,7 +476,7 @@
             showQuestion();
         }
 
-        // End the game and show results
+        // จบเกมโชว์หน้าใหม่
 function endGame() {
     document.getElementById('game-screen').classList.remove('active');
     document.getElementById('end-screen').classList.add('active');
@@ -480,7 +501,8 @@ function endGame() {
     document.getElementById('high-score-end').textContent = `High Score: ${highScore}`;
 }
 
-        // Restart the game
+
+        // เริ่มใหม่
         function restartGame() {
             document.getElementById('end-screen').classList.remove('active');
             document.getElementById('click-play-screen').classList.add('active');
