@@ -1,0 +1,35 @@
+/* พื้นหลังด้านบนที่มีโลโก้ */
+#logoBar {
+  position: fixed;      /* ติดอยู่บนจอตลอดเวลา */
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 90px;
+  background: transparent;  /* สีพื้นหลังโปร่งเล็กน้อย */
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  /* เงา */
+  z-index: 9999;         /* อยู่บนสุด */
+}
+
+/* โลโก้เอง */
+#logoBar img {
+  height: 40px;           /* ขนาดโลโก้ */
+  cursor: pointer;        /* เมาส์เปลี่ยนเป็นมือ */
+  transition: transform 0.2s ease;  /* เพิ่มเอฟเฟกต์ hover */
+}
+
+#logoBar img:hover {
+  transform: scale(1.05); /* ขยายเล็กน้อยเมื่อ hover */
+}
+
+
+#tl-logo {
+    color: aliceblue;
+    display: flex;
+    padding-left: 10px;
+    align-items: center;
+    font-size: 24px;
+    text-decoration: none;
+}
