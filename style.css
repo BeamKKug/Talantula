@@ -12,6 +12,47 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);  /* เงา */
   z-index: 9999;         /* อยู่บนสุด */
 }
+/*--------------------*/
+@media screen and (max-width: 768px) {
+    #game-container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2, h3 {
+        font-size: 1.3rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    button {
+        width: 90%;
+        font-size: 1rem;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .answer-button {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    #logoBar img {
+        width: 40px;
+        height: 40px;
+    }
+
+    #logoBar #tl-logo {
+        font-size: 1rem;
+    }
+}
+/*-------------------------------*/
+
 
 /* โลโก้เอง */
 #logoBar img {
