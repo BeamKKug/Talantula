@@ -1,228 +1,190 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chemistry Survivor</title>
-    <link rel="icon" href="ta.png" type="image/png">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            background: #0f0f1b;
-            color: #fff;
-            overflow: hidden;
-        }
-        #game-container {
-            text-align: center;
-            padding: 20px;
-        }
-        .screen {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 18px;
-            margin-top: 20px;
-            cursor: pointer;
-        }
-        .question {
-            font-size: 24px;
-            margin: 20px 0;
-        }
-        .choice {
-            display: block;
-            background-color: #1e1e2f;
-            margin: 10px auto;
-            padding: 10px;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .choice:hover {
-            background-color: #292945;
-        }
-        #score, #health-bar {
-            margin-top: 10px;
-        }
-        #health-bar {
-            width: 80%;
-            height: 20px;
-            background-color: #333;
-            border-radius: 10px;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-        #health {
-            height: 100%;
-            width: 100%;
-            background-color: #4caf50;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chemistry Survivor</title>
+  <link rel="icon" href="ta.png" type="image/png">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: #0f0f1b;
+      color: #fff;
+      overflow: hidden;
+    }
+    #game-container {
+      text-align: center;
+      padding: 20px;
+    }
+    .screen {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+    .question {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+    .choice {
+      display: block;
+      background-color: #1e1e2f;
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+      max-width: 400px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .choice:hover {
+      background-color: #292945;
+    }
+    #score, #health-bar {
+      margin-top: 10px;
+    }
+    #health-bar {
+      width: 80%;
+      height: 20px;
+      background-color: #333;
+      border-radius: 10px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    #health {
+      height: 100%;
+      width: 100%;
+      background-color: #4caf50;
+    }
+  </style>
 </head>
 <body>
-    <div id="game-container">
+  <div id="game-container">
 
-        <!-- หน้าจอเริ่ม -->
-        <div id="click-play-screen" class="screen active">
-            <h1>Chemistry Survivor 🧪</h1>
-            <p>ออกเดินทางสู่ดินแดนแห่งทางเคมี! ตอบคำถามเคมีอินทรีย์เพื่อรวบรวมคะแนนและเอาชีวิตรอด ทดสอบความรู้ของคุณและก้าวสู่การเป็นปรมาจารย์ด้านเคมี!</p>
-            <button onclick="startGame()">เริ่มเกม</button>
-        </div>
-
-        <!-- หน้าจอเล่นเกม -->
-        <div id="game-screen" class="screen">
-            <p id="score">คะแนน : 0</p>
-            <div id="health-bar"><div id="health"></div></div>
-            <div id="question" class="question"></div>
-            <div id="choices"></div>
-        </div>
-
-        <!-- หน้าจอจบเกม -->
-        <div id="end-screen" class="screen">
-            <h2 id="result-text">เกมจบแล้ว</h2>
-            <p id="final-score"></p>
-            <button onclick="restartGame()">เล่นอีกครั้ง</button>
-        </div>
+    <!-- หน้าจอเริ่ม -->
+    <div id="click-play-screen" class="screen active">
+      <h1>Chemistry Survivor 🧪</h1>
+      <p>ออกเดินทางสู่ดินแดนแห่งทางเคมี! ตอบคำถามเคมีอินทรีย์เพื่อรวบรวมคะแนนและเอาชีวิตรอด ทดสอบความรู้ของคุณและก้าวสู่การเป็นปรมาจารย์ด้านเคมี!</p>
+      <button onclick="startGame()">เริ่มเกม</button>
     </div>
 
-    <script>
-        const questionBank = [
-            {
-                question: "หมู่ฟังก์ชันของแอลกอฮอล์คืออะไร?",
-                choices: ["-OH", "-COOH", "-NH2", "-CHO"],
-                answer: 0
-            },
-            {
-                question: "สูตรโมเลกุลของมีเทนคืออะไร?",
-                choices: ["CH3OH", "CH4", "C2H6", "CO2"],
-                answer: 1
-            },
-            {
-                question: "สารประกอบใดเป็นแอลคีน?",
-                choices: ["C2H4", "C2H6", "CH4", "C6H6"],
-                answer: 0
-            },
-            {
-                question: "กลุ่มคาร์บอกซิล (-COOH) เป็นหมู่ฟังก์ชันของอะไร?",
-                choices: ["แอลกอฮอล์", "กรดคาร์บอกซิลิก", "เอมีน", "อัลดีไฮด์"],
-                answer: 1
-            },
-            {
-                question: "โพรเพนเป็นอัลเคนที่มีคาร์บอนกี่ตัว?",
-                choices: ["1", "2", "3", "4"],
-                answer: 2
-            },
-            {
-                question: "เบนซีนเป็นสารประเภทใด?",
-                choices: ["อัลเคน", "อัลคีน", "วัฏจักร", "อะโรมาติก"],
-                answer: 3
-            },
-            {
-                question: "หมู่แอลคิลคืออะไร?",
-                choices: ["R-OH", "R-COOH", "R-NH2", "R-"],
-                answer: 3
-            },
-            {
-                question: "หมู่เอมีน (-NH2) ทำให้สารมีคุณสมบัติเป็น?",
-                choices: ["กรด", "เบส", "ไม่มีผล", "สารประกอบอะโรมาติก"],
-                answer: 1
-            },
-            {
-                question: "C=C บ่งบอกถึงพันธะชนิดใด?",
-                choices: ["พันธะเดี่ยว", "พันธะคู่", "พันธะสาม", "ไม่มีพันธะ"],
-                answer: 1
-            },
-            {
-                question: "C≡C บ่งบอกถึงพันธะชนิดใด?",
-                choices: ["พันธะเดี่ยว", "พันธะคู่", "พันธะสาม", "ไม่มีพันธะ"],
-                answer: 2
-            }
-        ];
+    <!-- หน้าจอเล่นเกม -->
+    <div id="game-screen" class="screen">
+      <p id="score">คะแนน : 0</p>
+      <div id="health-bar"><div id="health"></div></div>
+      <div id="question" class="question"></div>
+      <div id="choices"></div>
+    </div>
 
-        let score = 0;
-        let health = 100;
-        let currentQuestion = 0;
-        let totalQuestions = 10;
-        let questions = [];
-        let gameFinishedNaturally = false;
+    <!-- หน้าจอจบเกม -->
+    <div id="end-screen" class="screen">
+      <h2 id="result-text">เกมจบแล้ว</h2>
+      <p id="final-score"></p>
+      <button onclick="restartGame()">เล่นอีกครั้ง</button>
+    </div>
+  </div>
 
-        function shuffleArray(array) {
-            return [...array].sort(() => Math.random() - 0.5);
-        }
+  <script>
+    const questionBank = [
+      { question: "หมู่ฟังก์ชันของแอลกอฮอล์คืออะไร?", choices: ["-OH", "-COOH", "-NH2", "-CHO"], answer: 0 },
+      { question: "หมู่ฟังก์ชันของคีโตนคืออะไร?", choices: ["-CHO", "-CO-", "-OH", "-COOH"], answer: 1 },
+      { question: "เอสเทอร์มีหมู่ฟังก์ชันเป็นลักษณะใด?", choices: ["-COOH", "-COO-", "-OH", "-NH2"], answer: 1 },
+      { question: "สูตรโมเลกุลของกรดเอทาโนอิกคืออะไร?", choices: ["CH3COOH", "C2H6O", "CH3OH", "C2H4"], answer: 0 },
+      { question: "สารประกอบใดต่อไปนี้เป็นอัลดีไฮด์?", choices: ["CH3CHO", "CH3CH2OH", "CH3COOH", "CH4"], answer: 0 },
+      { question: "หมู่ฟังก์ชันใดที่ทำให้สารมีกลิ่นหอมและพบในน้ำหอม?", choices: ["เอมีน", "เอสเทอร์", "คาร์บอกซิล", "แอลกอฮอล์"], answer: 1 },
+      { question: "สูตรโมเลกุลของมีเทนคืออะไร?", choices: ["CH3OH", "CH4", "C2H6", "CO2"], answer: 1 },
+      { question: "สารประกอบใดเป็นแอลคีน?", choices: ["C2H4", "C2H6", "CH4", "C6H6"], answer: 0 },
+      { question: "กลุ่มคาร์บอกซิล (-COOH) เป็นหมู่ฟังก์ชันของอะไร?", choices: ["แอลกอฮอล์", "กรดคาร์บอกซิลิก", "เอมีน", "อัลดีไฮด์"], answer: 1 },
+      { question: "โพรเพนเป็นอัลเคนที่มีคาร์บอนกี่ตัว?", choices: ["1", "2", "3", "4"], answer: 2 },
+      { question: "เบนซีนเป็นสารประเภทใด?", choices: ["อัลเคน", "อัลคีน", "วัฏจักร", "อะโรมาติก"], answer: 3 },
+      { question: "หมู่แอลคิลคืออะไร?", choices: ["R-OH", "R-COOH", "R-NH2", "R-"], answer: 3 },
+      { question: "หมู่เอมีน (-NH2) ทำให้สารมีคุณสมบัติเป็น?", choices: ["กรด", "เบส", "ไม่มีผล", "สารประกอบอะโรมาติก"], answer: 1 },
+      { question: "C=C บ่งบอกถึงพันธะชนิดใด?", choices: ["พันธะเดี่ยว", "พันธะคู่", "พันธะสาม", "ไม่มีพันธะ"], answer: 1 },
+      { question: "C≡C บ่งบอกถึงพันธะชนิดใด?", choices: ["พันธะเดี่ยว", "พันธะคู่", "พันธะสาม", "ไม่มีพันธะ"], answer: 2 }
+    ];
 
-        function startGame() {
-            score = 0;
-            health = 100;
-            currentQuestion = 0;
-            questions = shuffleArray(questionBank).slice(0, totalQuestions);
-            gameFinishedNaturally = false;
+    let score = 0;
+    let health = 100;
+    let currentQuestion = 0;
+    let totalQuestions = 15;
+    let questions = [];
+    let gameFinishedNaturally = false;
 
-            document.getElementById('click-play-screen').classList.remove('active');
-            document.getElementById('game-screen').classList.add('active');
-            document.getElementById('score').textContent = `คะแนน : ${score}`;
-            document.getElementById('health').style.width = `${health}%`;
-            showQuestion();
-        }
+    function shuffleArray(array) {
+      return [...array].sort(() => Math.random() - 0.5);
+    }
 
-        function showQuestion() {
-            if (currentQuestion >= questions.length) {
-                endGame(true);
-                return;
-            }
+    function startGame() {
+      score = 0;
+      health = 100;
+      currentQuestion = 0;
+      questions = shuffleArray(questionBank).slice(0, totalQuestions);
+      gameFinishedNaturally = false;
 
-            const q = questions[currentQuestion];
-            document.getElementById('question').textContent = q.question;
+      document.getElementById('click-play-screen').classList.remove('active');
+      document.getElementById('game-screen').classList.add('active');
+      document.getElementById('score').textContent = `คะแนน : ${score}`;
+      document.getElementById('health').style.width = `${health}%`;
+      showQuestion();
+    }
 
-            const choicesDiv = document.getElementById('choices');
-            choicesDiv.innerHTML = '';
-            q.choices.forEach((choice, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'choice';
-                btn.textContent = choice;
-                btn.onclick = () => selectAnswer(index);
-                choicesDiv.appendChild(btn);
-            });
-        }
+    function showQuestion() {
+      if (currentQuestion >= questions.length) {
+        endGame(true);
+        return;
+      }
 
-        function selectAnswer(choiceIndex) {
-            const q = questions[currentQuestion];
-            if (choiceIndex === q.answer) {
-                score++;
-            } else {
-                health -= 20;
-                if (health < 0) health = 0;
-            }
+      const q = questions[currentQuestion];
+      document.getElementById('question').textContent = q.question;
 
-            document.getElementById('score').textContent = `คะแนน : ${score}`;
-            document.getElementById('health').style.width = `${health}%`;
+      const choicesDiv = document.getElementById('choices');
+      choicesDiv.innerHTML = '';
+      q.choices.forEach((choice, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice';
+        btn.textContent = choice;
+        btn.onclick = () => selectAnswer(index);
+        choicesDiv.appendChild(btn);
+      });
+    }
 
-            currentQuestion++;
+    function selectAnswer(choiceIndex) {
+      const q = questions[currentQuestion];
+      if (choiceIndex === q.answer) {
+        score++;
+      } else {
+        health -= 20;
+        if (health < 0) health = 0;
+      }
 
-            if (health <= 0) {
-                endGame(false);
-            } else {
-                showQuestion();
-            }
-        }
+      document.getElementById('score').textContent = `คะแนน : ${score}`;
+      document.getElementById('health').style.width = `${health}%`;
+      currentQuestion++;
 
-        function endGame(won) {
-            document.getElementById('game-screen').classList.remove('active');
-            document.getElementById('end-screen').classList.add('active');
+      if (health <= 0) {
+        endGame(false);
+      } else {
+        showQuestion();
+      }
+    }
 
-            document.getElementById('result-text').textContent = won ? "คุณชนะ! 🎉" : "Game Over 💀";
-            document.getElementById('final-score').textContent = `คะแนนที่ได้: ${score}/${totalQuestions}`;
-        }
+    function endGame(won) {
+      document.getElementById('game-screen').classList.remove('active');
+      document.getElementById('end-screen').classList.add('active');
+      document.getElementById('result-text').textContent = won ? "คุณชนะ! 🎉" : "Game Over 💀";
+      document.getElementById('final-score').textContent = `คะแนนที่ได้: ${score}/${totalQuestions}`;
+    }
 
-        function restartGame() {
-            document.getElementById('end-screen').classList.remove('active');
-            document.getElementById('click-play-screen').classList.add('active');
-        }
-    </script>
+    function restartGame() {
+      document.getElementById('end-screen').classList.remove('active');
+      document.getElementById('click-play-screen').classList.add('active');
+    }
+  </script>
 </body>
 </html>
