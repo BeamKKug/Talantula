@@ -1,4 +1,3 @@
-// netlify/functions/spawn-item.js
 exports.handler = async function(event, context) {
   if (event.httpMethod !== 'POST') {
     return {
@@ -13,26 +12,31 @@ exports.handler = async function(event, context) {
     if (!playerName || !itemName) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ error: 'ต้องกรอก playerName และ itemName' }),
+        body: JSON.stringify({ error: 'กรุณาระบุ playerName และ itemName' }),
       };
     }
 
-    // --- ตรงนี้จำลองการเรียก Roblox HttpService ---
-    // คุณสามารถใช้ Webhook หรือระบบของคุณรับ HTTP นี้ใน Roblox
+    // 🔥 ส่งคำสั่งไปที่ Roblox ผ่าน webhook
+    const webhookUrl = 'https://your-roblox-api-webhook.url'; // <-- ใส่ URL จาก Roblox HttpService
 
-    console.log(`เสกของ ${itemName} ให้ ${playerName}`);
+    const axios = require('axios');
+    await axios.post(webhookUrl, {
+      playerName,
+      itemName
+    });
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: `เสกของ ${itemName} ให้ผู้เล่น ${playerName} แล้ว!`
+        message: `คำสั่งเสก ${itemName} ให้ ${playerName} ถูกส่งไปยัง Roblox แล้ว`
       })
     };
 
   } catch (err) {
+    console.error(err);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'เซิร์ฟเวอร์มีปัญหา' }),
+      body: JSON.stringify({ error: 'เซิร์ฟเวอร์ Netlify มีปัญหา' }),
     };
   }
 };
