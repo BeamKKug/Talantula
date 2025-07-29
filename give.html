@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>เสกของใน Roblox</title>
 </head>
 <body>
-    <h1>หน้าเสกของใน Roblox</h1>
-    
-    <label for="playerName">ชื่่อผู้เล่น Roblox:</label>
-    <input type="text" id="playerName" placeholder="เช่น Player123" />
+    <h1>เสกของให้ผู้เล่น Roblox</h1>
 
-    <label for="itemName">ชื่อไอเท็มที่จะเสก:</label>
-    <input type="text" id="itemName" placeholder="เช่น Sword" />
+    <label for="playerName">ชื่อผู้เล่น Roblox:</label>
+    <input type="text" id="playerName" placeholder="เช่น Player123"><br><br>
+
+    <label for="itemName">ชื่อไอเท็มใน ReplicatedStorage:</label>
+    <input type="text" id="itemName" placeholder="เช่น Sword"><br><br>
 
     <button id="spawnButton">เสกของ</button>
 
@@ -31,23 +31,23 @@
             }
 
             try {
-                // ✅ แก้ URL API ให้ถูกต้องตาม Netlify
-                const response = await fetch('/.netlify/functions/spawn-item', {
+                const response = await fetch('https://chemisty.netlify.app/.netlify/functions/spawn-item', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({ playerName, itemName })
                 });
 
                 const data = await response.json();
-
                 if (response.ok) {
-                    result.textContent = `✅ เสกของสำเร็จ: ${data.message}`;
+                    result.textContent = `✅ เสกของให้ ${playerName} สำเร็จ: ${itemName}`;
                 } else {
                     result.textContent = `❌ เกิดข้อผิดพลาด: ${data.error}`;
                 }
             } catch (err) {
-                result.textContent = '❌ ไม่สามารถเชื่อมต่อ API ได้';
                 console.error(err);
+                result.textContent = '❌ ไม่สามารถเชื่อมต่อ API ได้';
             }
         });
     </script>
