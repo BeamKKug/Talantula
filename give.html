@@ -1,55 +1,47 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <title>เสกของใน Roblox</title>
+  <meta charset="UTF-8" />
+  <title>เสกของใน Roblox</title>
 </head>
 <body>
-    <h1>เสกของให้ผู้เล่น Roblox</h1>
+  <h1>เสกของใน Roblox</h1>
+  
+  <label>ชื่อผู้เล่น Roblox:</label><br />
+  <input type="text" id="playerName" placeholder="เช่น Beam123" /><br /><br />
 
-    <label for="playerName">ชื่อผู้เล่น Roblox:</label>
-    <input type="text" id="playerName" placeholder="เช่น Player123"><br><br>
+  <label>ชื่อไอเท็ม (ตรงกับใน ReplicatedStorage):</label><br />
+  <input type="text" id="itemName" placeholder="เช่น Sword" /><br /><br />
 
-    <label for="itemName">ชื่อไอเท็มใน ReplicatedStorage:</label>
-    <input type="text" id="itemName" placeholder="เช่น Sword"><br><br>
+  <button id="spawnButton">เสกของ</button>
 
-    <button id="spawnButton">เสกของ</button>
+  <p id="result"></p>
 
-    <p id="result"></p>
+  <script>
+    document.getElementById('spawnButton').addEventListener('click', async () => {
+      const playerName = document.getElementById('playerName').value.trim();
+      const itemName = document.getElementById('itemName').value.trim();
+      const result = document.getElementById('result');
 
-    <script>
-        const spawnButton = document.getElementById('spawnButton');
-        const result = document.getElementById('result');
+      if (!playerName || !itemName) {
+        result.textContent = 'กรอกชื่อให้ครบ';
+        return;
+      }
 
-        spawnButton.addEventListener('click', async () => {
-            const playerName = document.getElementById('playerName').value.trim();
-            const itemName = document.getElementById('itemName').value.trim();
-
-            if (!playerName || !itemName) {
-                result.textContent = "กรุณากรอกข้อมูลให้ครบ";
-                return;
-            }
-
-            try {
-                const response = await fetch('https://chemisty.netlify.app/.netlify/functions/spawn-item', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ playerName, itemName })
-                });
-
-                const data = await response.json();
-                if (response.ok) {
-                    result.textContent = `✅ เสกของให้ ${playerName} สำเร็จ: ${itemName}`;
-                } else {
-                    result.textContent = `❌ เกิดข้อผิดพลาด: ${data.error}`;
-                }
-            } catch (err) {
-                console.error(err);
-                result.textContent = '❌ ไม่สามารถเชื่อมต่อ API ได้';
-            }
+      try {
+        const response = await fetch('/.netlify/functions/spawn-item', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ playerName, itemName })
         });
-    </script>
+
+        const data = await response.json();
+        result.textContent = data.message || data.error || 'ไม่ทราบผลลัพธ์';
+      } catch (err) {
+        result.textContent = 'ไม่สามารถเชื่อมต่อ API ได้';
+        console.error(err);
+      }
+    });
+  </script>
 </body>
 </html>
