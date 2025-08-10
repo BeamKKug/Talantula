@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PON-CHEAT</title>
+
+  <!-- Open Graph (Facebook, Messenger, LINE, Discord ใช้) -->
+  <meta property="og:title" content="PON-CHEAT | แจกโปร Line Rangers ฟรี ปลอดภัย ใช้งานง่าย" />
+  <meta property="og:description" content="เว็บไซต์แจก Mod ฟรี เกม Line Rangers พร้อมคีย์เข้าใช้งาน" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ponhack.net/" />
+  <!-- ไม่มี og:image ตามคำขอ -->
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="PON-CHEAT | แจกโปร Line Rangers ฟรี ปลอดภัย ใช้งานง่าย" />
+  <meta name="twitter:description" content="เว็บไซต์แจก Mod ฟรี เกม Line Rangers พร้อมคีย์เข้าใช้งาน" />
+  <!-- ไม่มี twitter:image ตามคำขอ -->
+
+  <!-- Fallback / Generic -->
+  <meta name="description" content="เว็บไซต์แจก Mod ฟรี เกม Line Rangers และอื่น ๆ มี ModMenu พร้อมคีย์เข้าใช้งาน" />
+
+    <!-- Google Fonts สายแจกโปร/เกม/รีวิว/โมเดิร์น/ราชการ/ลายมือ เพิ่มเติม -->
+<link href="https://fonts.googleapis.com/css2?family=K2D:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Athiti:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Trirong:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kodchasan:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pridi:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Maitree:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Taviraj:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chonburi&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Krub:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Thasadith:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700;900&display=swap" rel="stylesheet">
+
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+:root {
+  /* เปลี่ยนชื่อฟอนต์ตรงนี้เท่านั้น! */
+/* ตัวอย่าง: 'Kanit', 'Prompt', 'Mitr', 'Sarabun', 'Chakra Petch', 'Anuphan', 'IBM Plex Sans Thai', 'Bai Jamjuree', 'Sriracha', 'Pridi', 'Noto Sans Thai', 'Maitree', 'Taviraj', 'Chonburi', 'Krub', 'Thasadith', 'Manrope', 'Mali', 'Charmonman', 'Quicksand', 'K2D', 'Athiti', 'Itim', 'Trirong', 'Kodchasan', 'Fahkwang' */
+  --main-font: 'Bai Jamjuree', 'Segoe UI', Tahoma, sans-serif;
+
+  --bg-main: #181924;
+  --bg-card: #1F2941cc;
+  --bg-light: #232b3b;
+  --bg-banner: linear-gradient(90deg, #24e6c0 10%, #7069fa 80%, #1f2941 100%);
+  --border-1: #353b4e;
+  --accent: #24e6c0;
+  --accent-2: #7069fa;
+  --accent-3: #24d1a5;
+  --accent-4: #232b3b;
+  --text-main: #f0f4ff;
+  --text-muted: #bfc6da;
+  --text-accent: #24e6c0;
+  --badge-bg: #353b4e;
+  --badge-bg-2: #7069fa;
+  --vip: #24e6c0;
+  --vip-shadow: #24e6c088;
+  --btn-grad: linear-gradient(90deg, #24e6c0, #7069fa 80%);
+  --btn-line: linear-gradient(90deg, #24d1a5 30%, #7069fa 100%);
+}
+* {margin:0; padding:0; box-sizing:border-box;}
+body, header h1, .hero-title span, .key-box, .dl-title, .vip-head, .vip-card, .testi-title {
+  font-family: var(--main-font);
+}
+
+/* ----------- [CSS หลัก] ----------- */
+body {
+  background: var(--bg-main);
+  color: var(--text-main);
+  min-height: 100vh; display: flex; flex-direction: column; position: relative;
+  transition: background .2s;
+}
+#particles-js {position:fixed;z-index:0;top:0;left:0;width:100vw;height:100vh;pointer-events:none;}
+.wave-bg {position:fixed;z-index:0;left:0;bottom:0;width:100vw;height:210px;pointer-events:none;opacity:.7;}
+#loader {position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:9999;background:rgba(24,18,36,0.98);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.4rem;letter-spacing:1.5px;transition:opacity .5s;backdrop-filter:blur(7px);}
+.toggle-theme {position:fixed;top:1.3rem;right:1.3rem;z-index:1999;background:rgba(34,40,60,.20);border:none;border-radius:50%;width:46px;height:46px;font-size:1.45em;color:var(--accent-3);box-shadow:0 1px 8px #24e6c033;cursor:pointer;transition:.2s;}
+.toggle-theme:hover {background:var(--accent-3);color:var(--bg-main);}
+.banner {width:100vw;background: var(--bg-banner);color:#f0f4ff;font-weight:900;font-size:1.12rem;text-align:center;letter-spacing:1px;padding:.66rem 0;box-shadow:0 4px 18px #7069fa33, 0 0 32px #24e6c033;position:relative;z-index:10;}
+.banner span {filter:drop-shadow(0 1px 6px #fff7);}
+.hero {display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.3rem 0 1.1rem 0; margin-bottom:1.2rem;background: linear-gradient(120deg,#7069fa33 10%,#24e6c022 90%);border-radius: 0 0 35px 35px;box-shadow: 0 8px 40px #24e6c011;position:relative;z-index:2;}
+.hero-img {max-width:140px;width:70vw;margin-bottom:.7rem;filter:drop-shadow(0 4px 18px #24e6c088);}
+.hero-title span {font-size:2.22em;font-weight:900;color:var(--accent-2);text-shadow:0 2px 28px #24e6c0;}
+.hero-title p {color:var(--accent);font-size:1.15em;letter-spacing:1px;margin-top:.4em;}
+header {background: var(--bg-banner);padding: 0.7rem 0 0.85rem 0;text-align: center;box-shadow: 0 3px 18px #7069fa20;border-bottom-left-radius: 14px;border-bottom-right-radius: 14px;position: relative;z-index: 10;}
+header h1 {font-size: 1.35rem;font-weight: 900;color: #f0f4ff;text-shadow: 0 2px 18px #24e6c0, 0 0 8px #7069fa88;letter-spacing: 2px;line-height: 1.5;margin: 0;}
+header .icon {display: inline-block;vertical-align: middle;margin-right: 0.33em;font-size: 1.23em;filter: drop-shadow(0 1px 2px #fff8);}
+main {flex: 1;padding: 2.5rem 1.5rem 1.3rem 1.5rem;max-width: 900px;margin: 1.1rem auto 2rem auto;width: 100%;position: relative;z-index: 2;}
+.dl-cards {list-style:none;display:flex;gap:1.2em;flex-wrap:wrap;padding:0;margin:0 0 1.5em 0;justify-content:center;}
+.dl-card {display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg-card),var(--bg-light) 90%);border-radius:17px;box-shadow:0 2px 20px #24e6c033;padding:1.2em 1.3em;margin:.2em .1em;font-weight:700;position:relative;transition:.22s;color:var(--accent-3);text-decoration:none;font-size:1.12em;min-width:120px;opacity:0;transform:translateY(34px) scale(0.94);}
+.dl-card:hover {background:linear-gradient(135deg,#24e6c0cc,#7069facc);color:#232b3b;transform:scale(1.06);}
+.dl-ico {font-size:1.8em;}
+.dl-title {margin-top:.32em;font-size:1.07em;}
+.dl-badge {position:absolute;top:13px;right:18px;background:var(--badge-bg-2);color:#fff;font-size:.88em;padding:0.22em 1em;border-radius:13px;box-shadow:0 1px 8px #7069fa40;letter-spacing:1.2px;font-weight:900;}
+.dl-size {margin-top:.5em;color:var(--accent);font-size:.91em;}
+section {background: var(--bg-card);padding: 1.8rem 2rem;border-radius: 22px;margin-bottom: 2.2rem;box-shadow: 0 0 22px #24e6c033, 0 0 0 #7069fa44;border: 2px solid var(--border-1);backdrop-filter: blur(12px);opacity: 0;transform: translateY(36px) scale(0.96);}
+section:hover {box-shadow: 0 0 44px #24e6c088, 0 0 36px #7069fabb;border-image: linear-gradient(45deg,#24e6c0,#7069fa) 1;background: rgba(31,41,65,0.97);transform: scale(1.018) translateY(-3px);}
+section h2 {color: var(--accent);margin-bottom: 1.18rem;border-bottom: 3px solid var(--accent-3);padding-bottom: 0.5rem;font-weight: 800;letter-spacing: 1.1px;display: flex;align-items: center;gap: .5em;font-size: 1.13rem;text-shadow: 0 0 14px #24e6c0;}
+.sec-ico {font-size:1.2em;vertical-align:middle;filter:drop-shadow(0 1px 2px #24e6c0cc);}
+.key-box {background: linear-gradient(135deg, var(--accent-3), var(--accent) 90%);padding: 1.2rem 1.5rem;border-radius: 17px;color: var(--bg-main);font-weight: 900;font-size: 1.4rem;text-align: center;user-select: all;box-shadow: 0 0 32px #24e6c033, 0 0 10px #7069fa66;cursor: pointer;border: 2.2px solid #232b3b7a;letter-spacing: 1.2px;transition: background 0.25s, box-shadow .23s;}
+.key-box:hover {background: linear-gradient(135deg, var(--accent), var(--accent-3) 85%);box-shadow: 0 0 36px #24e6c0, 0 0 26px #7069fa;}
+.contact-links a {display: inline-block;background: var(--btn-grad);color: #232b3b;text-decoration: none;padding: 0.88rem 2.1rem;border-radius: 44px;font-weight: 800;margin: 0.5rem 1rem 0.5rem 0;font-size:1.07rem;box-shadow: 0 6px 18px #24e6c033;transition: all 0.22s cubic-bezier(.64,.16,.52,1.06);}
+.contact-links a:hover {background: linear-gradient(45deg, #24e6c0, #7069fa 90%);color: #fff;box-shadow: 0 7px 30px #24e6c0bb,0 0 6px #7069fa;text-shadow:0 0 10px #fff,0 0 2px #24e6c066;}
+.vip-section {background:linear-gradient(135deg,#232b3b 60%,#24e6c013 100%);padding:2rem 2rem 2.4rem 2rem;border-radius:27px;box-shadow:0 0 38px #24e6c044;position:relative;text-align:center;margin-bottom:2.5em;}
+.vip-head {font-size:1.6em;font-weight:900;color:var(--vip);text-shadow:0 0 13px var(--vip-shadow),0 0 22px #18122b77;margin-bottom:1em;letter-spacing:2px;}
+.vip-card {background:linear-gradient(135deg,#1f2941 80%,#24e6c033);display:inline-block;padding:1.5em 2.3em;border-radius:18px;box-shadow:0 1px 16px #24e6c099;border:2px solid #353b4e;font-size:1.14em;color:#fff;margin-bottom:.7em;}
+.vip-features li {list-style:none;text-align:left;color:var(--accent-3);font-size:1.1em;margin-bottom:.31em;}
+.vip-pay {margin:1.2em 0;}
+.vip-btn {
+  display:inline-block;
+  background: var(--btn-line);
+  color:#fff;
+  padding:.89em 2.2em;
+  border-radius:30px;
+  font-weight:900;
+  font-size:1.13em;
+  box-shadow:0 1px 16px #24e6c044;
+  letter-spacing:1px;
+  text-decoration:none;
+  margin:0 0 .5em 0;
+  transition:.2s;
+}
+.vip-btn:hover {
+  background:linear-gradient(90deg,#24e6c0,#7069fa);
+  color:#232b3b;
+}
+.vip-btn img {height:1.25em;vertical-align:middle;margin-right:.5em;margin-top:-3px;}
+.vip-contact {font-size:.98em;margin-top:.31em;}
+.video-section.video-row {display: flex;gap: 1.5em;justify-content: center;align-items: flex-start;margin: 2.2em 0;flex-wrap: wrap;}
+.video-section.video-row .video-box {flex: 1 1 320px;min-width: 250px;max-width: 440px;display: flex;flex-direction: column;align-items: center;}
+.video-title {font-weight:900;font-size:1.22em;color:var(--accent-2);margin-bottom:.6em;letter-spacing:.8px;}
+.review-video {width:95%;max-width:440px;height:238px;border-radius:17px;box-shadow:0 2px 30px #24e6c088;border:2.2px solid var(--accent);}
+@media (max-width: 900px) {.video-section.video-row {flex-direction: column;gap: 1em;}.video-section.video-row .video-box {max-width: 100%;}}
+.trust-badges{display:flex;gap:.6em;flex-wrap:wrap;justify-content:center;margin:.6em 0 1em 0;}
+.trust-badge{background:linear-gradient(90deg,#7069fa,#24e6c0);color:#fff;padding:.38em 1.25em;border-radius:12px;font-weight:700;font-size:.99em;box-shadow:0 1px 7px #24e6c033;}
+@media (max-width: 700px) {.dl-cards {flex-direction:column;gap:.7em;}.dl-card {width:100%;}}
+@media (max-width: 600px) {
+  main {padding:.5rem .1rem .9rem .1rem;margin:.4rem auto .4rem auto;}
+  .banner {font-size:.95rem;}
+  .hero {padding:1.1rem 0 0.6rem 0;}
+  .hero-img {max-width:72px;}
+  .hero-title span {font-size:1.2em;}
+  header h1 {font-size: 1.09rem;}
+  section {padding:.8rem .36rem;border-radius:10px;}
+  .key-box {font-size:.98rem;padding:.67rem .5rem;}
+  .fab {right:1rem;bottom:1.1rem;}
+  .toggle-theme{top:.6rem;right:.6rem;width:38px;height:38px;}
+  footer{padding:.95rem .2rem;}
+  .review-video{height:168px;}
+}
+@keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
+@keyframes fadeInDown {from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:none;}}
+@keyframes sectionFadeIn {to {opacity: 1; transform: none;box-shadow: 0 0 38px #24e6c060, 0 0 22px #7069fa60;}}
+.fab {position:fixed;right:2.5rem;bottom:2.5rem;z-index:1998;background:var(--accent-2);color:#fff;padding:0.7em 1.22em;border-radius:99px;font-size:1.3em;box-shadow:0 4px 24px #24e6c099;transition:background .18s;}
+.fab:hover {background:var(--accent);color:#fff;}
+.popup-success {
+  position: fixed; left: 50%; bottom: 2.9rem; transform: translateX(-50%);
+  background: var(--accent-2); color: #fff; font-weight: 800;
+  padding: 1em 2.2em; border-radius: 16px; box-shadow: 0 2px 18px #24e6c099; font-size: 1.05em;
+  z-index: 99999; animation: fadeIn .23s;
+}
+footer {text-align:center;padding:1.6rem 1rem 1.6rem 1rem;font-size:.99em;color:#bfc6da;}
+body.loaded #loader {opacity:0;pointer-events:none;}
+@media (max-width: 600px) {
+  .video-section.video-row {
+    flex-direction: column;
+    align-items: center !important;
+    gap: 1.2em;
+  }
+  .video-section.video-row .video-box {
+    min-width: 0;
+    max-width: 100vw;
+    width: 100vw;
+    padding: 0 0.3em;
+    box-sizing: border-box;
+    align-items: center;
+    margin: 0 auto 1em auto;
+  }
+  .review-video {
+    width: 98vw !important;
+    max-width: 400px;
+    min-width: 180px;
+    height: 45vw;
+    max-height: 210px;
+    margin: 0 auto;
+    display: block;
+  }
+}
+@media (max-width: 420px) {
+  .review-video {
+    max-width: 97vw;
+    height: 44vw;
+    min-width: 130px;
+    max-height: 180px;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div id="loader">กำลังโหลด <span style="font-size:1.7em;vertical-align:-.2em;">⏳</span></div>
+    <!-- Particles.js BG -->
+    <div id="particles-js"></div>
+    <!-- SVG WAVE BG -->
+    <svg class="wave-bg" viewBox="0 0 1440 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="url(#wave1)" fill-opacity="0.8" d="M0,160L120,149.3C240,139,480,117,720,122.7C960,128,1200,160,1320,176L1440,192L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"/>
+      <defs>
+        <linearGradient id="wave1" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#7069fa"/>
+          <stop offset="1" stop-color="#24e6c0"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <button id="toggleTheme" title="เปลี่ยนโหมด" class="toggle-theme">🌙</button>
+    <div class="banner">
+        <span>⚡ แจกฟรี 100% <b>MOD + GAME + APP</b> & หรือเช่า VIP | ปลอดภัย | ไม่มีโฆษณา! ⚡</span>
+    </div>
+    <div class="hero" style="padding: 2rem 0 1rem 0; margin-bottom: 1.2rem; background: linear-gradient(120deg, #7069fa44 10%, #24e6c022 90%); border-radius: 0 0 35px 35px; box-shadow: 0 8px 40px #24e6c011; position: relative; z-index: 2; text-align: center;">
+
+
+
+    <main>
+        <!-- TRUST BADGES -->
+        <div class="trust-badges">
+            <span class="trust-badge">🔒 ปลอดภัย 100%</span>
+            <span class="trust-badge">⚡ ติดตั้งง่ายใช้งานง่าย</span>
+            <span class="trust-badge">⭐ อัพเดทตลอด</span>
+        </div>
+        <!-- VIP SECTION -->
+        <div class="vip-section">
+            <div class="vip-head">🔥 โปร VIP - ฟังชั่นเต็มระบบ! 🔥</div>
+            <div class="vip-card">
+                <ul class="vip-features">
+                    <li>✅ ฟังชั่นเยอะเล่นได้ทุกโหมด</li>
+                    <li>✅ อัพเดทโปรไวกว่าตัวฟรี</li>
+                    <li>✅ ดูแลหลังการเช่าตลอด</li>
+                    <li>✅ ทีมงานซัพพอร์ต 1-1</li>
+                    <li>✅ ใช้งานง่ายติดตั้งง่าย</li>
+                    <li>✅ รองรับคอม Amd Intel</li>
+                    <li>✅ รองรับแอนดรอยด์10-15</li>
+                    <li>✅ รองรับ คอม มือถือ iOS</li>
+                    <li>✅ ล็อคอินเกมได้ทุกช่องทาง</li>
+                </ul>
+                <div class="vip-pay">
+                    <a href="https://lin.ee/b5O8yrx" class="vip-btn" target="_blank">
+                        เช่าโปร VIP ทักไลน์
+                    </a>
+                </div>
+                <div style="margin-top:1em;font-size:.98em;color:var(--accent);">ติดต่อสอบถามแนะนำทักไลน์แอดมินตอบไวสุด!</div>
+            </div>
+        </div>
+        <!-- คลิปรีวิว: 2 คลิป side by side -->
+        <div class="video-section video-row">
+            <div class="video-box">
+                <div class="video-title">🎬 รีวิวโปร VIP MOD MENU!</div>
+                <iframe class="review-video" src="https://www.youtube.com/embed/RIsJRPCX7bY" title="รีวิวโปร VIP" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-box">
+                <div class="video-title">🎬 รีวิวโปร VIP GG AUTO SCRIPT</div>
+                <iframe class="review-video" src="https://www.youtube.com/embed/C5WFqTTmkXA" title="รีวิวใช้งาน (คลิปที่ 2)" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+        <!-- ปุ่มดาวน์โหลดแบบ Card -->
+        <ul class="dl-cards">
+                    <li>
+                <a href="https://www.mediafire.com/file/gjbd2z8dz3o9hs7/MOD_MENU_FREE.apk/file" class="dl-card" target="_blank" rel="noopener noreferrer">
+                    <span class="dl-ico">📲</span>
+                    <span class="dl-title">ดาวน์โหลดโปร</span>
+                    <span class="dl-badge">ฟรี</span>
+                    <span class="dl-size">2MB</span>
+                </a>
+            </li>
+                    <li>
+                <a href="https://www.mediafire.com/file/xsq96lb0wn5unly/LINE+Rangers_11.2.1.apk/file" class="dl-card" target="_blank" rel="noopener noreferrer">
+                    <span class="dl-ico">🎮</span>
+                    <span class="dl-title">ดาวน์โหลดเกม</span>
+                    <span class="dl-badge">ฟรี</span>
+                    <span class="dl-size">137MB</span>
+                </a>
+            </li>
+                    <li>
+                <a href="https://www.mediafire.com/file/w8z799ra9h8f1h4/VPhoneGaGa_V3.8.5.apk/file" class="dl-card" target="_blank" rel="noopener noreferrer">
+                    <span class="dl-ico">🤖</span>
+                    <span class="dl-title">ดาวน์โหลดแอพโคลน</span>
+                    <span class="dl-badge">ฟรี</span>
+                    <span class="dl-size">936MB</span>
+                </a>
+            </li>
+                </ul>
+        <!-- SECTION: คีย์ -->
+        <section>
+            <h2><span class="sec-ico">🔑</span> คีย์สำหรับเข้าโปร</h2>
+            <div class="key-box" title="คลิกเพื่อคัดลอกคีย์" onclick="copyKey()">PON-CHEAT-PF99</div>
+            <small style="display:block; text-align:center; margin-top:0.6rem; color:#bfc6da;">คลิกที่คีย์เพื่อคัดลอก</small>
+        </section>
+        <!-- SECTION: ติดต่อ -->
+        <section>
+            <h2><span class="sec-ico"> ติดต่อแอดมิน</h2>
+            <div class="contact-links">
+                <a href="https://discord.com/invite/xZMBayJzJN" target="_blank" rel="noopener noreferrer">Discord</a>
+                <a href="https://lin.ee/b5O8yrx" target="_blank" rel="noopener noreferrer">LINE</a>
+            </div>
+        </section>
+    </main>
+    <footer>
+        &copy; 2025 แจก Mod ฟรี | เขียนโดย PON-CHEAT
+    </footer>
+    <!-- Floating Button Discord -->
+    <a class="fab" href="https://discord.com/invite/xZMBayJzJN" title="แชทกับแอดมิน Discord" target="_blank">💬</a>
+    <!-- JS: Loader, Copy Key, Theme, Particles, Popup -->
+    <script>
+// Loader animation
+window.addEventListener('load', () => {
+  document.body.classList.add('loaded');
+  setTimeout(() => {
+    document.querySelectorAll('.dl-card').forEach(el => el.style.opacity = '1');
+    document.querySelectorAll('section').forEach(el => el.style.opacity = '1');
+  }, 100);
+});
+
+// Copy key function with popup
+function showPopup(msg) {
+  const popup = document.createElement('div');
+  popup.className = 'popup-success';
+  popup.textContent = msg;
+  document.body.appendChild(popup);
+  setTimeout(() => popup.remove(), 2200);
+}
+function copyKey() {
+  const keyText = document.querySelector('.key-box').innerText;
+  navigator.clipboard.writeText(keyText).then(() => {
+    showPopup('คัดลอกคีย์แล้ว: ' + keyText);
+  }).catch(() => {
+    showPopup('ไม่สามารถคัดลอกคีย์ได้');
+  });
+}
+
+// Toggle light/dark theme
+document.getElementById('toggleTheme')?.addEventListener('click', function() {
+  document.body.classList.toggle('light-mode');
+  this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+});
+
+// Particles background
+particlesJS('particles-js', {
+  particles: {
+    number: {value: 50, density: {enable: true, value_area: 800}},
+    color: {value: ["#24e6c0","#7069fa","#24d1a5"]},
+    shape: {type: "circle"},
+    opacity: {value: 0.24, random: true},
+    size: {value: 8, random: true},
+    line_linked: {enable: false},
+    move: {enable: true, speed: 2.1, direction: "none", random: true, straight: false, out_mode: "out"}
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {onhover: {enable: true, mode: "repulse"}, onclick: {enable: false}, resize: true},
+    modes: {repulse: {distance: 100, duration: 0.4}}
+  },
+  retina_detect: true
+});
+
+// --- ระบบป้องกันคลิกขวา, เลือกข้อความ, คัดลอก, คีย์ลัด DevTools ---
+
+// ป้องกันคลิกขวา
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// ป้องกันการเลือกข้อความ
+document.addEventListener('selectstart', e => e.preventDefault());
+
+// ป้องกันคัดลอกข้อความ (Ctrl+C, Cmd+C)
+document.addEventListener('copy', e => {
+  e.preventDefault();
+  alert('ขออภัย ไม่อนุญาตให้คัดลอกเนื้อหาหน้านี้');
+});
+
+// ป้องกันคีย์ลัด DevTools และดู source
+document.addEventListener('keydown', e => {
+  // F12
+  if (e.key === 'F12' || e.keyCode === 123) e.preventDefault();
+
+  // Ctrl+Shift+I หรือ Cmd+Option+I
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.keyCode === 73)) e.preventDefault();
+
+  // Ctrl+Shift+J หรือ Cmd+Option+J
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.keyCode === 74)) e.preventDefault();
+
+  // Ctrl+U หรือ Cmd+U
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.keyCode === 85)) e.preventDefault();
+
+  // Ctrl+S หรือ Cmd+S
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.keyCode === 83)) e.preventDefault();
+
+  // Ctrl+Shift+C หรือ Cmd+Shift+C
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'C' || e.keyCode === 67)) e.preventDefault();
+
+  // Print Screen
+  if (e.key === 'PrintScreen') e.preventDefault();
+});
+
+// Detect เปิด DevTools แบบเปิดขนาดหน้าต่างผิดปกติ
+let devtoolsOpened = false;
+setInterval(() => {
+  if (!devtoolsOpened && (
+    window.outerWidth - window.innerWidth > 300 ||
+    window.outerHeight - window.innerHeight > 300
+  )) {
+    devtoolsOpened = true;
+    document.body.innerHTML = '';
+    alert('ขออภัย ไม่อนุญาตให้ใช้ Developer Tools');
+  }
+}, 700);
+
+
+    window.addEventListener('load',function(){
+        document.body.classList.add('loaded');
+        setTimeout(function(){
+            document.querySelectorAll('.dl-card').forEach(e=>e.style.opacity='1');
+            document.querySelectorAll('section').forEach(e=>e.style.opacity='1');
+        },100);
+    });
+    function showPopup(msg) {
+      let popup = document.createElement('div');
+      popup.className = 'popup-success';
+      popup.textContent = msg;
+      document.body.appendChild(popup);
+      setTimeout(()=>popup.remove(),2200);
+    }
+    function copyKey() {
+        const keyText = document.querySelector('.key-box').innerText;
+        navigator.clipboard.writeText(keyText).then(() => {
+            showPopup('คัดลอกคีย์แล้ว: '+keyText);
+        }).catch(() => {
+            showPopup('ไม่สามารถคัดลอกคีย์ได้');
+        });
+    }
+    document.getElementById('toggleTheme').onclick = function() {
+      document.body.classList.toggle('light-mode');
+      this.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+    };
+    particlesJS('particles-js',{
+      "particles": {
+        "number": {"value":50,"density":{"enable":true,"value_area":800}},
+        "color": {"value":["#24e6c0","#7069fa","#24d1a5"]},
+        "shape": {"type":"circle"},
+        "opacity": {"value":0.24,"random":true},
+        "size": {"value":8,"random":true},
+        "line_linked": {"enable":false},
+        "move": {"enable":true,"speed":2.1,"direction":"none","random":true,"straight":false,"out_mode":"out"}
+      },
+      "interactivity": {
+        "detect_on":"canvas",
+        "events": {
+          "onhover": {"enable":true,"mode":"repulse"},
+          "onclick": {"enable":false,"mode":"push"},
+          "resize":true
+        },
+        "modes": {
+          "repulse": {"distance":100,"duration":0.4}
+        }
+      },
+      "retina_detect": true
+    });
+    </script>
+</body>
+</html>
