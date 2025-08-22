@@ -1,47 +1,26 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <title>เสกของใน Roblox</title>
+  <meta charset="UTF-8">
+  <title>ถามตอบ</title>
 </head>
 <body>
-  <h1>เสกของใน Roblox</h1>
-  
-  <label>ชื่อผู้เล่น Roblox:</label><br />
-  <input type="text" id="playerName" placeholder="เช่น Beam123" /><br /><br />
-
-  <label>ชื่อไอเท็ม (ตรงกับใน ReplicatedStorage):</label><br />
-  <input type="text" id="itemName" placeholder="เช่น Sword" /><br /><br />
-
-  <button id="spawnButton">เสกของ</button>
-
-  <p id="result"></p>
+  <h2>ใส่คำถาม :</h2>
+  <input type="text" id="question" placeholder="พิมพ์คำถามที่นี่">
+  <button onclick="checkAnswer()">ส่ง</button>
+  <p id="answer"></p>
 
   <script>
-    document.getElementById('spawnButton').addEventListener('click', async () => {
-      const playerName = document.getElementById('playerName').value.trim();
-      const itemName = document.getElementById('itemName').value.trim();
-      const result = document.getElementById('result');
+    function checkAnswer() {
+      let q = document.getElementById("question").value;
+      let ans = document.getElementById("answer");
 
-      if (!playerName || !itemName) {
-        result.textContent = 'กรอกชื่อให้ครบ';
-        return;
+      if (q === "ได้เล่นเอนจีแอลมั้ย, ได้เล่นเอนจีแอลไหม") {
+        ans.textContent = "ใช่แล้ว";
+      } else {
+        ans.textContent = "ไม่";
       }
-
-      try {
-        const response = await fetch('/.netlify/functions/spawn-item', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ playerName, itemName })
-        });
-
-        const data = await response.json();
-        result.textContent = data.message || data.error || 'ไม่ทราบผลลัพธ์';
-      } catch (err) {
-        result.textContent = 'ไม่สามารถเชื่อมต่อ API ได้';
-        console.error(err);
-      }
-    });
+    }
   </script>
 </body>
 </html>
