@@ -2,7 +2,7 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>Demo Chat (HTML Only)</title>
+  <title>Demo Chat Messenger Style</title>
   <style>
     body { font-family: Arial, sans-serif; background:#f0f2f5; margin:0; }
     .login, .chat { max-width:400px; margin:40px auto; padding:20px; border-radius:12px; background:white; box-shadow:0 3px 6px rgba(0,0,0,.15); }
@@ -10,9 +10,17 @@
     input { width:100%; padding:10px; margin:6px 0; border:1px solid #ccc; border-radius:8px; }
     button { padding:10px 16px; border:none; border-radius:8px; background:#4a90e2; color:white; cursor:pointer; }
     button:hover { background:#357ab8; }
-    #messages { height:300px; overflow-y:auto; border:1px solid #ddd; border-radius:8px; padding:10px; background:#fafafa; margin-bottom:10px; }
-    .me { background:#4a90e2; color:white; border-radius:10px; padding:8px 12px; margin:4px 0; text-align:right; }
-    .other { background:#e5e5ea; border-radius:10px; padding:8px 12px; margin:4px 0; text-align:left; }
+    #messages { height:350px; overflow-y:auto; padding:10px; background:#fafafa; margin-bottom:10px; border-radius:8px; display:flex; flex-direction:column; }
+    .msgRow { display:flex; align-items:flex-end; margin:6px 0; }
+    .msgRow.me { justify-content:flex-end; }
+    .avatar { width:32px; height:32px; border-radius:50%; background:#bbb; color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; margin:0 6px; }
+    .bubble { max-width:65%; padding:10px 14px; border-radius:18px; font-size:14px; position:relative; }
+    .me .bubble { background:#4a90e2; color:white; border-bottom-right-radius:4px; }
+    .other .bubble { background:#e5e5ea; color:black; border-bottom-left-radius:4px; }
+    .time { font-size:10px; color:#666; margin-top:2px; text-align:right; }
+    .me .time { text-align:left; color:#ddd; }
+    .composer { display:flex; gap:6px; }
+    .composer input { flex:1; }
   </style>
 </head>
 <body>
@@ -26,15 +34,17 @@
 </div>
 
 <div class="chat" id="chatBox" style="display:none">
-  <h2>แชท</h2>
+  <h2 id="chatTitle">แชท</h2>
   <div id="messages"></div>
-  <input id="msgInput" placeholder="พิมพ์ข้อความ...">
-  <button onclick="sendMsg()">ส่ง</button>
+  <div class="composer">
+    <input id="msgInput" placeholder="พิมพ์ข้อความ...">
+    <button onclick="sendMsg()">ส่ง</button>
+  </div>
 </div>
 
 <script>
   // ---- กำหนดยูสและรหัสไว้ตรงนี้ ----
-  const USERS = { User1:"1234", BeamKkug:"1234" };
+  const USERS = { user:"1234", beam:"1234" };
 
   let currentUser = null;
   const bc = new BroadcastChannel("chat-demo");
@@ -46,6 +56,7 @@
       currentUser = u;
       document.getElementById("loginBox").style.display="none";
       document.getElementById("chatBox").style.display="block";
+      document.getElementById("chatTitle").textContent = "แชท ("+u+")";
       loadMessages();
     } else {
       alert("ยูสหรือรหัสไม่ถูกต้อง");
@@ -69,15 +80,32 @@
     localStorage.setItem("chatLog", JSON.stringify(all));
   }
 
+  function formatTime(ts){
+    const d = new Date(ts);
+    return d.getHours().toString().padStart(2,"0")+":"+d.getMinutes().toString().padStart(2,"0");
+  }
+
   function loadMessages(){
     const box = document.getElementById("messages");
     const all = JSON.parse(localStorage.getItem("chatLog")||"[]");
     box.innerHTML="";
     all.forEach(m=>{
-      const div=document.createElement("div");
-      div.className=(m.from===currentUser)?"me":"other";
-      div.textContent=`${m.from}: ${m.text}`;
-      box.appendChild(div);
+      const row=document.createElement("div");
+      row.className="msgRow "+(m.from===currentUser?"me":"other");
+      const avatar=document.createElement("div");
+      avatar.className="avatar";
+      avatar.textContent=m.from[0].toUpperCase();
+      const bubble=document.createElement("div");
+      bubble.className="bubble";
+      bubble.innerHTML=m.text+"<div class='time'>"+formatTime(m.ts)+"</div>";
+      if(m.from===currentUser){
+        row.appendChild(bubble);
+        row.appendChild(avatar);
+      } else {
+        row.appendChild(avatar);
+        row.appendChild(bubble);
+      }
+      box.appendChild(row);
     });
     box.scrollTop=box.scrollHeight;
   }
