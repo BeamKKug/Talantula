@@ -2,170 +2,265 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mini Chat</title>
+  <title>Multi-user Chat Demo</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #6a11cb, #2575fc);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      margin:0;
+      background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+      min-height: 100vh;
     }
-    .login-box, .chat-box {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      width: 350px;
-      box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    .login, .chat {
+      max-width:800px;
+      margin:40px auto;
+      padding:20px;
+      border-radius:12px;
+      background:white;
+      box-shadow:0 3px 12px rgba(0,0,0,.2);
     }
-    .chat-box { display: none; }
-    h2 { text-align: center; color: #444; }
-    input, button, select {
-      width: 100%;
-      padding: 10px;
-      margin: 5px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 14px;
+    h2 { margin-top:0; }
+    input {
+      width:100%;
+      padding:10px;
+      margin:6px 0;
+      border:1px solid #ccc;
+      border-radius:8px;
     }
     button {
-      background: #2575fc;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      border: none;
-      transition: 0.3s;
+      padding:10px 16px;
+      border:none;
+      border-radius:8px;
+      background:#4a90e2;
+      color:white;
+      cursor:pointer;
     }
-    button:hover { background: #6a11cb; }
-    .messages {
-      height: 250px;
-      overflow-y: auto;
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 10px;
-      background: #f9f9f9;
-      margin-bottom: 10px;
+    button:hover { background:#357ab8; }
+    .chatLayout { display:flex; height:500px; }
+    .users {
+      width:180px;
+      border-right:1px solid #ddd;
+      overflow-y:auto;
+      background:#f9fbff;
+      border-radius:10px 0 0 10px;
     }
-    .message {
-      margin: 5px 0;
-      padding: 8px;
-      border-radius: 10px;
-      max-width: 70%;
-      clear: both;
+    .users h3 {
+      margin:0;
+      padding:10px;
+      background:#eef3ff;
+      border-bottom:1px solid #ddd;
     }
-    .me {
-      background: #2575fc;
-      color: white;
-      float: right;
-      text-align: right;
+    .userBtn {
+      display:block;
+      width:100%;
+      text-align:left;
+      padding:10px;
+      border:none;
+      background:none;
+      cursor:pointer;
+      border-bottom:1px solid #eee;
     }
-    .other {
-      background: #e5e5e5;
-      float: left;
+    .userBtn:hover { background:#f0f2f5; }
+    .userBtn.active { background:#dbeafe; font-weight:bold; }
+    .chatArea { flex:1; display:flex; flex-direction:column; }
+    #messages {
+      flex:1;
+      overflow-y:auto;
+      padding:10px;
+      background:#fdfdfd;
+      border-left:1px solid #ddd;
     }
+    .msgRow { display:flex; align-items:flex-end; margin:6px 0; }
+    .msgRow.me { justify-content:flex-end; }
+    .avatar {
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      background:#4a90e2;
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+      margin:0 6px;
+    }
+    .bubble {
+      max-width:65%;
+      padding:10px 14px;
+      border-radius:18px;
+      font-size:14px;
+      position:relative;
+      word-wrap:break-word;
+    }
+    .me .bubble {
+      background:#4a90e2;
+      color:white;
+      border-bottom-right-radius:4px;
+    }
+    .other .bubble {
+      background:#e5e5ea;
+      color:black;
+      border-bottom-left-radius:4px;
+    }
+    .time {
+      font-size:10px;
+      color:#666;
+      margin-top:2px;
+      text-align:right;
+    }
+    .me .time { text-align:left; color:#ddd; }
+    .composer {
+      display:flex;
+      gap:6px;
+      padding:8px;
+      border-top:1px solid #ddd;
+    }
+    .composer input { flex:1; }
+
+    /* 🔔 กล่องแจ้งเตือน */
     .notify {
       position: fixed;
-      top: 10px;
-      right: 10px;
+      top: 20px;
+      right: 20px;
       background: #ff4757;
       color: white;
-      padding: 10px 15px;
+      padding: 12px 18px;
       border-radius: 8px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.3);
       display: none;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      z-index: 9999;
+      font-size:14px;
     }
   </style>
 </head>
 <body>
 
-  <!-- กล่องล็อกอิน -->
-  <div class="login-box">
-    <h2>🔑 Login</h2>
-    <select id="username">
-      <option value="user1">User1</option>
-      <option value="user2">User2</option>
-      <option value="user3">User3</option>
-      <option value="user4">User4</option>
-      <option value="user5">User5</option>
-      <option value="user6">User6</option>
-    </select>
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="login()">เข้าสู่ระบบ</button>
+<div class="login" id="loginBox">
+  <h2>เข้าสู่ระบบ</h2>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p style="font-size:12px;color:#666">ยูส: user1–user6 / รหัส: 1234</p>
+</div>
+
+<div class="chat" id="chatBox" style="display:none">
+  <h2 id="chatTitle">แชท</h2>
+  <div class="chatLayout">
+    <div class="users">
+      <h3>เพื่อน</h3>
+      <div id="userList"></div>
+    </div>
+    <div class="chatArea">
+      <div id="messages"></div>
+      <div class="composer">
+        <input id="msgInput" placeholder="พิมพ์ข้อความ...">
+        <button onclick="sendMsg()">ส่ง</button>
+      </div>
+    </div>
   </div>
+</div>
 
-  <!-- กล่องแชท -->
-  <div class="chat-box">
-    <h2>💬 Chat Room</h2>
-    <div class="messages" id="messages"></div>
-    <input type="text" id="msgInput" placeholder="พิมพ์ข้อความ...">
-    <button onclick="sendMessage()">ส่งข้อความ</button>
-    <button onclick="logout()">ออกจากระบบ</button>
-  </div>
+<!-- กล่องแจ้งเตือน -->
+<div class="notify" id="notifyBox"></div>
 
-  <!-- แจ้งเตือน -->
-  <div class="notify" id="notify"></div>
+<script>
+  // ---- กำหนดยูสและรหัส ----
+  const USERS = {};
+  for(let i=1;i<=6;i++){ USERS["user"+i]="1234"; }
 
-  <script>
-    // กำหนด user และ password
-    const users = {
-      user1: "1234",
-      user2: "2345",
-      user3: "3456",
-      user4: "4567",
-      user5: "5678",
-      user6: "6789"
-    };
+  let currentUser = null;
+  let currentPeer = null;
+  const bc = new BroadcastChannel("chat-demo2");
 
-    let currentUser = null;
-
-    function login() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-
-      if (users[user] && users[user] === pass) {
-        currentUser = user;
-        document.querySelector(".login-box").style.display = "none";
-        document.querySelector(".chat-box").style.display = "block";
-        showNotify("✅ Login สำเร็จ: " + user);
-      } else {
-        showNotify("❌ รหัสผิด!");
-      }
+  function login(){
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+    if(USERS[u] && USERS[u] === p){
+      currentUser = u;
+      document.getElementById("loginBox").style.display="none";
+      document.getElementById("chatBox").style.display="block";
+      document.getElementById("chatTitle").textContent = "แชท ("+u+")";
+      renderUserList();
+      showNotify("✅ เข้าสู่ระบบสำเร็จ: "+u);
+    } else {
+      showNotify("❌ ยูสหรือรหัสไม่ถูกต้อง");
     }
+  }
 
-    function logout() {
-      currentUser = null;
-      document.querySelector(".login-box").style.display = "block";
-      document.querySelector(".chat-box").style.display = "none";
-      document.getElementById("messages").innerHTML = "";
-      showNotify("🚪 ออกจากระบบแล้ว");
+  function renderUserList(){
+    const list=document.getElementById("userList");
+    list.innerHTML="";
+    Object.keys(USERS).forEach(name=>{
+      if(name===currentUser) return;
+      const btn=document.createElement("button");
+      btn.className="userBtn"+(currentPeer===name?" active":"");
+      btn.textContent=name;
+      btn.onclick=()=>{ currentPeer=name; renderUserList(); loadMessages(); };
+      list.appendChild(btn);
+    });
+  }
+
+  function sendMsg(){
+    if(!currentPeer){ showNotify("⚠️ เลือกเพื่อนก่อน"); return; }
+    const input=document.getElementById("msgInput");
+    const text=input.value.trim();
+    if(!text) return;
+    const msg={ from: currentUser, to: currentPeer, text, ts: Date.now() };
+    saveMessage(msg);
+    bc.postMessage(msg);
+    input.value="";
+    loadMessages();
+    showNotify("📩 ส่งข้อความแล้ว");
+  }
+
+  function saveMessage(msg){
+    const all=JSON.parse(localStorage.getItem("chatLog2")||"[]");
+    all.push(msg);
+    localStorage.setItem("chatLog2",JSON.stringify(all));
+  }
+
+  function formatTime(ts){
+    const d=new Date(ts);
+    return d.getHours().toString().padStart(2,"0")+":"+d.getMinutes().toString().padStart(2,"0");
+  }
+
+  function loadMessages(){
+    const box=document.getElementById("messages");
+    const all=JSON.parse(localStorage.getItem("chatLog2")||"[]");
+    box.innerHTML="";
+    const thread=all.filter(m=>(m.from===currentUser&&m.to===currentPeer)||(m.to===currentUser&&m.from===currentPeer));
+    thread.forEach(m=>{
+      const row=document.createElement("div");
+      row.className="msgRow "+(m.from===currentUser?"me":"other");
+      const avatar=document.createElement("div");
+      avatar.className="avatar";
+      avatar.textContent=m.from[0].toUpperCase();
+      const bubble=document.createElement("div");
+      bubble.className="bubble";
+      bubble.innerHTML=m.text+"<div class='time'>"+formatTime(m.ts)+"</div>";
+      if(m.from===currentUser){ row.appendChild(bubble); row.appendChild(avatar); }
+      else { row.appendChild(avatar); row.appendChild(bubble); }
+      box.appendChild(row);
+    });
+    box.scrollTop=box.scrollHeight;
+  }
+
+  bc.onmessage=(ev)=>{
+    saveMessage(ev.data);
+    if(ev.data.from===currentPeer||ev.data.to===currentPeer){
+      loadMessages();
+    } else if(ev.data.to===currentUser){
+      showNotify("🔔 ข้อความใหม่จาก "+ev.data.from);
     }
+  };
 
-    function sendMessage() {
-      const input = document.getElementById("msgInput");
-      const msg = input.value.trim();
-      if (!msg) return;
-
-      const box = document.getElementById("messages");
-      const div = document.createElement("div");
-      div.className = "message me";
-      div.innerText = currentUser + ": " + msg;
-      box.appendChild(div);
-      box.scrollTop = box.scrollHeight;
-
-      input.value = "";
-      showNotify("📩 ส่งข้อความแล้ว");
-    }
-
-    function showNotify(text) {
-      const n = document.getElementById("notify");
-      n.innerText = text;
-      n.style.display = "block";
-      setTimeout(() => n.style.display = "none", 2000);
-    }
-  </script>
+  // ฟังก์ชันแสดงการแจ้งเตือน
+  function showNotify(msg){
+    const box=document.getElementById("notifyBox");
+    box.textContent=msg;
+    box.style.display="block";
+    setTimeout(()=>{ box.style.display="none"; },2000);
+  }
+</script>
 
 </body>
 </html>
