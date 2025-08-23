@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo Chat (HTML Only)</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f0f2f5; margin:0; }
+    .login, .chat { max-width:400px; margin:40px auto; padding:20px; border-radius:12px; background:white; box-shadow:0 3px 6px rgba(0,0,0,.15); }
+    h2 { margin-top:0; }
+    input { width:100%; padding:10px; margin:6px 0; border:1px solid #ccc; border-radius:8px; }
+    button { padding:10px 16px; border:none; border-radius:8px; background:#4a90e2; color:white; cursor:pointer; }
+    button:hover { background:#357ab8; }
+    #messages { height:300px; overflow-y:auto; border:1px solid #ddd; border-radius:8px; padding:10px; background:#fafafa; margin-bottom:10px; }
+    .me { background:#4a90e2; color:white; border-radius:10px; padding:8px 12px; margin:4px 0; text-align:right; }
+    .other { background:#e5e5ea; border-radius:10px; padding:8px 12px; margin:4px 0; text-align:left; }
+  </style>
+</head>
+<body>
+
+<div class="login" id="loginBox">
+  <h2>เข้าสู่ระบบ</h2>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p style="font-size:12px;color:#666">ยูสตัวอย่าง: alice/1234, bob/1234</p>
+</div>
+
+<div class="chat" id="chatBox" style="display:none">
+  <h2>แชท</h2>
+  <div id="messages"></div>
+  <input id="msgInput" placeholder="พิมพ์ข้อความ...">
+  <button onclick="sendMsg()">ส่ง</button>
+</div>
+
+<script>
+  // ---- กำหนดยูสและรหัสไว้ตรงนี้ ----
+  const USERS = { User1:"1234", BeamKkug:"1234" };
+
+  let currentUser = null;
+  const bc = new BroadcastChannel("chat-demo");
+
+  function login(){
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+    if(USERS[u] && USERS[u] === p){
+      currentUser = u;
+      document.getElementById("loginBox").style.display="none";
+      document.getElementById("chatBox").style.display="block";
+      loadMessages();
+    } else {
+      alert("ยูสหรือรหัสไม่ถูกต้อง");
+    }
+  }
+
+  function sendMsg(){
+    const input = document.getElementById("msgInput");
+    const text = input.value.trim();
+    if(!text) return;
+    const msg = { from: currentUser, text, ts: Date.now() };
+    saveMessage(msg);
+    bc.postMessage(msg);
+    input.value="";
+    loadMessages();
+  }
+
+  function saveMessage(msg){
+    const all = JSON.parse(localStorage.getItem("chatLog")||"[]");
+    all.push(msg);
+    localStorage.setItem("chatLog", JSON.stringify(all));
+  }
+
+  function loadMessages(){
+    const box = document.getElementById("messages");
+    const all = JSON.parse(localStorage.getItem("chatLog")||"[]");
+    box.innerHTML="";
+    all.forEach(m=>{
+      const div=document.createElement("div");
+      div.className=(m.from===currentUser)?"me":"other";
+      div.textContent=`${m.from}: ${m.text}`;
+      box.appendChild(div);
+    });
+    box.scrollTop=box.scrollHeight;
+  }
+
+  bc.onmessage = (ev)=>{ saveMessage(ev.data); loadMessages(); };
+</script>
+
+</body>
+</html>
