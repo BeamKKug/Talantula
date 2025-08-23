@@ -2,15 +2,22 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>Demo Chat Messenger Style</title>
+  <title>Multi-user Chat Demo</title>
   <style>
     body { font-family: Arial, sans-serif; background:#f0f2f5; margin:0; }
-    .login, .chat { max-width:400px; margin:40px auto; padding:20px; border-radius:12px; background:white; box-shadow:0 3px 6px rgba(0,0,0,.15); }
+    .login, .chat { max-width:800px; margin:40px auto; padding:20px; border-radius:12px; background:white; box-shadow:0 3px 6px rgba(0,0,0,.15); }
     h2 { margin-top:0; }
     input { width:100%; padding:10px; margin:6px 0; border:1px solid #ccc; border-radius:8px; }
     button { padding:10px 16px; border:none; border-radius:8px; background:#4a90e2; color:white; cursor:pointer; }
     button:hover { background:#357ab8; }
-    #messages { height:350px; overflow-y:auto; padding:10px; background:#fafafa; margin-bottom:10px; border-radius:8px; display:flex; flex-direction:column; }
+    .chatLayout { display:flex; height:500px; }
+    .users { width:180px; border-right:1px solid #ddd; overflow-y:auto; }
+    .users h3 { margin:0; padding:10px; background:#f9f9f9; border-bottom:1px solid #ddd; }
+    .userBtn { display:block; width:100%; text-align:left; padding:10px; border:none; background:none; cursor:pointer; border-bottom:1px solid #eee; }
+    .userBtn:hover { background:#f0f2f5; }
+    .userBtn.active { background:#dbeafe; font-weight:bold; }
+    .chatArea { flex:1; display:flex; flex-direction:column; }
+    #messages { flex:1; overflow-y:auto; padding:10px; background:#fafafa; }
     .msgRow { display:flex; align-items:flex-end; margin:6px 0; }
     .msgRow.me { justify-content:flex-end; }
     .avatar { width:32px; height:32px; border-radius:50%; background:#bbb; color:white; display:flex; align-items:center; justify-content:center; font-weight:bold; margin:0 6px; }
@@ -19,7 +26,7 @@
     .other .bubble { background:#e5e5ea; color:black; border-bottom-left-radius:4px; }
     .time { font-size:10px; color:#666; margin-top:2px; text-align:right; }
     .me .time { text-align:left; color:#ddd; }
-    .composer { display:flex; gap:6px; }
+    .composer { display:flex; gap:6px; padding:8px; border-top:1px solid #ddd; }
     .composer input { flex:1; }
   </style>
 </head>
@@ -30,24 +37,34 @@
   <input id="user" placeholder="Username">
   <input id="pass" type="password" placeholder="Password">
   <button onclick="login()">Login</button>
-  <p style="font-size:12px;color:#666">ยูสตัวอย่าง: alice/1234, bob/1234</p>
+  <p style="font-size:12px;color:#666">ยูส: user1–user6 / รหัส: 1234</p>
 </div>
 
 <div class="chat" id="chatBox" style="display:none">
   <h2 id="chatTitle">แชท</h2>
-  <div id="messages"></div>
-  <div class="composer">
-    <input id="msgInput" placeholder="พิมพ์ข้อความ...">
-    <button onclick="sendMsg()">ส่ง</button>
+  <div class="chatLayout">
+    <div class="users">
+      <h3>เพื่อน</h3>
+      <div id="userList"></div>
+    </div>
+    <div class="chatArea">
+      <div id="messages"></div>
+      <div class="composer">
+        <input id="msgInput" placeholder="พิมพ์ข้อความ...">
+        <button onclick="sendMsg()">ส่ง</button>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-  // ---- กำหนดยูสและรหัสไว้ตรงนี้ ----
-  const USERS = { user:"1234", beam:"1234" };
+  // ---- กำหนดยูสและรหัส ----
+  const USERS = {};
+  for(let i=1;i<=6;i++){ USERS["user"+i]="1234"; }
 
   let currentUser = null;
-  const bc = new BroadcastChannel("chat-demo");
+  let currentPeer = null;
+  const bc = new BroadcastChannel("chat-demo2");
 
   function login(){
     const u = document.getElementById("user").value;
@@ -57,17 +74,31 @@
       document.getElementById("loginBox").style.display="none";
       document.getElementById("chatBox").style.display="block";
       document.getElementById("chatTitle").textContent = "แชท ("+u+")";
-      loadMessages();
+      renderUserList();
     } else {
       alert("ยูสหรือรหัสไม่ถูกต้อง");
     }
   }
 
+  function renderUserList(){
+    const list=document.getElementById("userList");
+    list.innerHTML="";
+    Object.keys(USERS).forEach(name=>{
+      if(name===currentUser) return;
+      const btn=document.createElement("button");
+      btn.className="userBtn"+(currentPeer===name?" active":"");
+      btn.textContent=name;
+      btn.onclick=()=>{ currentPeer=name; renderUserList(); loadMessages(); };
+      list.appendChild(btn);
+    });
+  }
+
   function sendMsg(){
-    const input = document.getElementById("msgInput");
-    const text = input.value.trim();
+    if(!currentPeer){ alert("เลือกเพื่อนก่อน"); return; }
+    const input=document.getElementById("msgInput");
+    const text=input.value.trim();
     if(!text) return;
-    const msg = { from: currentUser, text, ts: Date.now() };
+    const msg={ from: currentUser, to: currentPeer, text, ts: Date.now() };
     saveMessage(msg);
     bc.postMessage(msg);
     input.value="";
@@ -75,21 +106,22 @@
   }
 
   function saveMessage(msg){
-    const all = JSON.parse(localStorage.getItem("chatLog")||"[]");
+    const all=JSON.parse(localStorage.getItem("chatLog2")||"[]");
     all.push(msg);
-    localStorage.setItem("chatLog", JSON.stringify(all));
+    localStorage.setItem("chatLog2",JSON.stringify(all));
   }
 
   function formatTime(ts){
-    const d = new Date(ts);
+    const d=new Date(ts);
     return d.getHours().toString().padStart(2,"0")+":"+d.getMinutes().toString().padStart(2,"0");
   }
 
   function loadMessages(){
-    const box = document.getElementById("messages");
-    const all = JSON.parse(localStorage.getItem("chatLog")||"[]");
+    const box=document.getElementById("messages");
+    const all=JSON.parse(localStorage.getItem("chatLog2")||"[]");
     box.innerHTML="";
-    all.forEach(m=>{
+    const thread=all.filter(m=>(m.from===currentUser&&m.to===currentPeer)||(m.to===currentUser&&m.from===currentPeer));
+    thread.forEach(m=>{
       const row=document.createElement("div");
       row.className="msgRow "+(m.from===currentUser?"me":"other");
       const avatar=document.createElement("div");
@@ -98,19 +130,14 @@
       const bubble=document.createElement("div");
       bubble.className="bubble";
       bubble.innerHTML=m.text+"<div class='time'>"+formatTime(m.ts)+"</div>";
-      if(m.from===currentUser){
-        row.appendChild(bubble);
-        row.appendChild(avatar);
-      } else {
-        row.appendChild(avatar);
-        row.appendChild(bubble);
-      }
+      if(m.from===currentUser){ row.appendChild(bubble); row.appendChild(avatar); }
+      else { row.appendChild(avatar); row.appendChild(bubble); }
       box.appendChild(row);
     });
     box.scrollTop=box.scrollHeight;
   }
 
-  bc.onmessage = (ev)=>{ saveMessage(ev.data); loadMessages(); };
+  bc.onmessage=(ev)=>{ saveMessage(ev.data); if(ev.data.from===currentPeer||ev.data.to===currentPeer) loadMessages(); };
 </script>
 
 </body>
