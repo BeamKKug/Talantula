@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+	<meta charset="UTF-8">
+	<title>เกมเคมีอินทรีย์ ม.6</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			max-width: 700px;
+			margin: 20px auto;
+		}
+
+		h1 {
+			text-align: center;
+			color: #2c3e50;
+		}
+
+		.question {
+			margin-bottom: 20px;
+		}
+
+		button {
+			display: block;
+			margin: 5px 0;
+			padding: 10px;
+			width: 100%;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		.correct {
+			background-color: #2ecc71;
+			color: white;
+		}
+
+		.wrong {
+			background-color: #e74c3c;
+			color: white;
+		}
+
+		.score {
+			font-weight: bold;
+			text-align: center;
+			margin-top: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>เกมเคมีอินทรีย์ ม.6</h1>
+	<div id="game"></div>
+	<div class="score" id="score"></div>
+
+	<script>
+		const questions = [{
+				q: "หมู่ฟังก์ชัน –OH เป็นเอกลักษณ์ของสารใด?",
+				options: ["แอลกอฮอล์", "อีเทอร์", "อัลดีไฮด์", "คีโตน"],
+				answer: 0
+			},
+			{
+				q: "สารประกอบ C2H6O มีไอโซเมอร์ได้กี่ชนิด?",
+				options: ["1", "2", "3", "4"],
+				answer: 1
+			},
+			{
+				q: "หมู่ฟังก์ชัน –COOH เรียกว่าอะไร?",
+				options: ["กรดคาร์บอกซิลิก", "แอลกอฮอล์", "อีเทอร์", "อัลดีไฮด์"],
+				answer: 0
+			},
+			{
+				q: "อัลเคนมีพันธะกี่แบบ?",
+				options: ["เดี่ยว", "คู่", "สาม", "ทั้งคู่"],
+				answer: 0
+			},
+			{
+				q: "เอทานอลมีสูตรโมเลกุลเท่าไหร่?",
+				options: ["C2H6O", "C2H4O", "C3H6O", "C2H5OH"],
+				answer: 0
+			},
+			{
+				q: "สารประกอบใดเป็นคีโตน?",
+				options: ["CH3COCH3", "CH3CH2OH", "HCOOH", "CH3CHO"],
+				answer: 0
+			},
+			{
+				q: "กรดคาร์บอกซิลิกปล่อย H+ ได้เนื่องจากหมู่ใด?",
+				options: ["–OH", "–COOH", "–CHO", "–NH2"],
+				answer: 1
+			},
+			{
+				q: "สารใดมีความสามารถละลายน้ำมากที่สุด?",
+				options: ["บิวเทน", "เมทานอล", "เฮกเซน", "เอทาน"],
+				answer: 1
+			},
+			{
+				q: "สาร C3H6O อาจเป็นไอโซเมอร์ชนิดใด?",
+				options: ["โพรพานอล", "โพรพานาล", "โพรพานอน (คีโตน)", "ทั้ง B และ C"],
+				answer: 3
+			},
+			{
+				q: "หมู่ฟังก์ชัน –CHO เรียกว่าอะไร?",
+				options: ["คีโตน", "แอลดีไฮด์", "เอมีน", "แอลกอฮอล์"],
+				answer: 1
+			},
+			{
+				q: "สารประกอบใดเป็นอีเทอร์?",
+				options: ["CH3OCH3", "CH3CH2OH", "CH3COOH", "CH3CHO"],
+				answer: 0
+			},
+			{
+				q: "สารประกอบใดมีความเป็นกรดสูงที่สุด?",
+				options: ["แอลกอฮอล์", "น้ำ", "ฟีนอล", "กรดคาร์บอกซิลิก"],
+				answer: 3
+			}
+		];
+
+		let current = 0;
+		let score = 0;
+
+		function loadQuestion() {
+			const gameDiv = document.getElementById("game");
+			gameDiv.innerHTML = "";
+			if (current >= questions.length) {
+				document.getElementById("score").innerHTML = คุณทำคะแนนได้ ${score} / ${questions.length};
+				return;
+			}
+			const q = questions[current];
+			const questionDiv = document.createElement("div");
+			questionDiv.className = "question";
+			questionDiv.innerHTML = <h3>ข้อ ${current+1}: ${q.q}</h3>;
+			q.options.forEach((option, index) => {
+				const btn = document.createElement("button");
+				btn.innerText = option;
+				btn.onclick = () => checkAnswer(index);
+				questionDiv.appendChild(btn);
+			});
+			gameDiv.appendChild(questionDiv);
+		}
+
+		function checkAnswer(selected) {
+			const q = questions[current];
+			const buttons = document.querySelectorAll(".question button");
+			if (selected === q.answer) {
+				buttons[selected].classList.add("correct");
+				score++;
+			} else {
+				buttons[selected].classList.add("wrong");
+				buttons[q.answer].classList.add("correct");
+			}
+			current++;
+			setTimeout(loadQuestion, 1000);
+		}
+
+		loadQuestion();
+	</script>
+</body>
+
+</html>
