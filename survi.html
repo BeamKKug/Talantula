@@ -69,7 +69,7 @@
       border-radius: 10px;
       cursor: pointer;
       margin-top: 15px;
-      display: none; /* ซ่อนปุ่มก่อน */
+      display: none;
     }
 
     .button:hover {
@@ -83,11 +83,10 @@
   <div id="game-area">
     <p>✨ สร้างโมเลกุล: <span id="target"></span></p>
     <div id="atoms">
-      <!-- ไอคอนแทนอะตอม -->
-      <div class="atom" draggable="true" data-atom="H">💧 H</div>
-      <div class="atom" draggable="true" data-atom="O">🌬️ O</div>
-      <div class="atom" draggable="true" data-atom="C">🔥 C</div>
-      <div class="atom" draggable="true" data-atom="N">🍃 N</div>
+      <div class="atom" draggable="true" data-atom="H" data-symbol="💧 H">💧 H</div>
+      <div class="atom" draggable="true" data-atom="O" data-symbol="🌬️ O">🌬️ O</div>
+      <div class="atom" draggable="true" data-atom="C" data-symbol="🔥 C">🔥 C</div>
+      <div class="atom" draggable="true" data-atom="N" data-symbol="🍃 N">🍃 N</div>
     </div>
 
     <div id="drop-zone">ลากอะตอมมาวางที่นี่ 🧩</div>
@@ -123,10 +122,10 @@
         dropZone.innerHTML = "ลากอะตอมมาวางที่นี่ 🧩";
       } else {
         dropZone.innerHTML = "";
-        dropAtoms.forEach(atom => {
+        dropAtoms.forEach(a => {
           let span = document.createElement("span");
           span.className = "atom-placed";
-          span.textContent = atom;
+          span.textContent = a.symbol;
           dropZone.appendChild(span);
         });
       }
@@ -136,8 +135,8 @@
       dropAtoms = [];
       renderDropZone();
       statusEl.textContent = "";
-      nextBtn.style.display = "none"; 
-      checkBtn.style.display = "inline-block"; 
+      nextBtn.style.display = "none";
+      checkBtn.style.display = "inline-block";
 
       currentMolecule = molecules[Math.floor(Math.random() * molecules.length)];
       targetEl.textContent = `${currentMolecule.name} (${formulaToString(currentMolecule.formula)})`;
@@ -153,16 +152,27 @@
 
     function checkAnswer() {
       let counts = {};
-      dropAtoms.forEach(a => counts[a] = (counts[a] || 0) + 1);
+      dropAtoms.forEach(a => counts[a.atom] = (counts[a.atom] || 0) + 1);
 
-      let correct = JSON.stringify(counts) === JSON.stringify(currentMolecule.formula);
+      let correct = true;
+      for (let atom in currentMolecule.formula) {
+        if (counts[atom] !== currentMolecule.formula[atom]) {
+          correct = false;
+        }
+      }
+      // ตรวจว่ามีอะตอมเกินมาหรือไม่
+      for (let atom in counts) {
+        if (!(atom in currentMolecule.formula)) {
+          correct = false;
+        }
+      }
 
       if (correct) {
         statusEl.textContent = "✅ ถูกต้อง! เก่งมาก 🎉";
         statusEl.style.color = "green";
         score += 10;
-        nextBtn.style.display = "inline-block"; 
-        checkBtn.style.display = "none"; 
+        nextBtn.style.display = "inline-block";
+        checkBtn.style.display = "none";
       } else {
         statusEl.textContent = "❌ ยังไม่ถูก ลองใหม่อีกครั้งนะ";
         statusEl.style.color = "red";
@@ -173,6 +183,7 @@
     document.querySelectorAll(".atom").forEach(atom => {
       atom.addEventListener("dragstart", e => {
         e.dataTransfer.setData("atom", e.target.dataset.atom);
+        e.dataTransfer.setData("symbol", e.target.dataset.symbol);
       });
     });
 
@@ -183,7 +194,8 @@
     dropZone.addEventListener("drop", e => {
       e.preventDefault();
       let atom = e.dataTransfer.getData("atom");
-      dropAtoms.push(atom);
+      let symbol = e.dataTransfer.getData("symbol");
+      dropAtoms.push({ atom, symbol });
       renderDropZone();
     });
 
