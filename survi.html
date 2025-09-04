@@ -42,6 +42,12 @@
       background: #f9f9f9;
     }
 
+    #drop-zone .atom-placed {
+      font-size: 28px;
+      margin: 5px;
+      display: inline-block;
+    }
+
     #status {
       font-size: 18px;
       margin: 15px;
@@ -112,9 +118,23 @@
     const checkBtn = document.getElementById("checkBtn");
     const nextBtn = document.getElementById("nextBtn");
 
+    function renderDropZone() {
+      if (dropAtoms.length === 0) {
+        dropZone.innerHTML = "ลากอะตอมมาวางที่นี่ 🧩";
+      } else {
+        dropZone.innerHTML = "";
+        dropAtoms.forEach(atom => {
+          let span = document.createElement("span");
+          span.className = "atom-placed";
+          span.textContent = atom;
+          dropZone.appendChild(span);
+        });
+      }
+    }
+
     function nextQuestion() {
       dropAtoms = [];
-      dropZone.innerHTML = "ลากอะตอมมาวางที่นี่ 🧩";
+      renderDropZone();
       statusEl.textContent = "";
       nextBtn.style.display = "none"; 
       checkBtn.style.display = "inline-block"; 
@@ -164,10 +184,10 @@
       e.preventDefault();
       let atom = e.dataTransfer.getData("atom");
       dropAtoms.push(atom);
-      dropZone.innerHTML += " " + atom;
+      renderDropZone();
     });
 
     nextQuestion();
   </script>
 </body>
-  </html>
+</html>
