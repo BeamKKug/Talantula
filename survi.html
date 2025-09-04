@@ -160,7 +160,6 @@
           correct = false;
         }
       }
-      // ตรวจว่ามีอะตอมเกินมาหรือไม่
       for (let atom in counts) {
         if (!(atom in currentMolecule.formula)) {
           correct = false;
@@ -182,21 +181,21 @@
 
     document.querySelectorAll(".atom").forEach(atom => {
       atom.addEventListener("dragstart", e => {
-        e.dataTransfer.setData("atom", e.target.dataset.atom);
-        e.dataTransfer.setData("symbol", e.target.dataset.symbol);
+        // เก็บ id ชั่วคราวแทน
+        e.dataTransfer.setData("id", e.target.dataset.atom);
       });
     });
 
-    dropZone.addEventListener("dragover", e => {
-      e.preventDefault();
-    });
+    dropZone.addEventListener("dragover", e => e.preventDefault());
 
     dropZone.addEventListener("drop", e => {
       e.preventDefault();
-      let atom = e.dataTransfer.getData("atom");
-      let symbol = e.dataTransfer.getData("symbol");
-      dropAtoms.push({ atom, symbol });
-      renderDropZone();
+      let atomType = e.dataTransfer.getData("id");
+      let atomEl = document.querySelector(`.atom[data-atom="${atomType}"]`);
+      if (atomEl) {
+        dropAtoms.push({ atom: atomEl.dataset.atom, symbol: atomEl.dataset.symbol });
+        renderDropZone();
+      }
     });
 
     nextQuestion();
