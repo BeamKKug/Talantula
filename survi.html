@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>Bond Builder เกมเคมี</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", sans-serif;
+      background: linear-gradient(to right, #d1f7ff, #fff4d1);
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #4cafef;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    #game-area {
+      margin-top: 20px;
+    }
+
+    .atom {
+      display: inline-block;
+      font-size: 40px;
+      cursor: grab;
+      margin: 10px;
+      padding: 10px;
+    }
+
+    #drop-zone {
+      border: 2px dashed #555;
+      border-radius: 15px;
+      width: 80%;
+      height: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      background: #f9f9f9;
+    }
+
+    #status {
+      font-size: 18px;
+      margin: 15px;
+      font-weight: bold;
+    }
+
+    #score {
+      font-size: 20px;
+      color: darkgreen;
+      font-weight: bold;
+    }
+
+    .button {
+      background: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 15px;
+      display: none; /* ซ่อนปุ่มก่อน */
+    }
+
+    .button:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <header>🧪 Bond Builder – เกมสร้างโมเลกุล</header>
+
+  <div id="game-area">
+    <p>✨ สร้างโมเลกุล: <span id="target"></span></p>
+    <div id="atoms">
+      <!-- ไอคอนแทนอะตอม -->
+      <div class="atom" draggable="true" data-atom="H">💧 H</div>
+      <div class="atom" draggable="true" data-atom="O">🌬️ O</div>
+      <div class="atom" draggable="true" data-atom="C">🔥 C</div>
+      <div class="atom" draggable="true" data-atom="N">🍃 N</div>
+    </div>
+
+    <div id="drop-zone">ลากอะตอมมาวางที่นี่ 🧩</div>
+
+    <p id="status"></p>
+    <p id="score">คะแนน: 0</p>
+
+    <button id="checkBtn" class="button" onclick="checkAnswer()">ตรวจคำตอบ ✅</button>
+    <button id="nextBtn" class="button" onclick="nextQuestion()">โจทย์ใหม่ ▶</button>
+  </div>
+
+  <script>
+    const molecules = [
+      { name: "น้ำ", formula: { H: 2, O: 1 } },   // H2O
+      { name: "คาร์บอนไดออกไซด์", formula: { C: 1, O: 2 } }, // CO2
+      { name: "มีเทน", formula: { C: 1, H: 4 } }, // CH4
+      { name: "แอมโมเนีย", formula: { N: 1, H: 3 } } // NH3
+    ];
+
+    let currentMolecule = {};
+    let dropAtoms = [];
+    let score = 0;
+
+    const targetEl = document.getElementById("target");
+    const dropZone = document.getElementById("drop-zone");
+    const statusEl = document.getElementById("status");
+    const scoreEl = document.getElementById("score");
+    const checkBtn = document.getElementById("checkBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    function nextQuestion() {
+      dropAtoms = [];
+      dropZone.innerHTML = "ลากอะตอมมาวางที่นี่ 🧩";
+      statusEl.textContent = "";
+      nextBtn.style.display = "none"; 
+      checkBtn.style.display = "inline-block"; 
+
+      currentMolecule = molecules[Math.floor(Math.random() * molecules.length)];
+      targetEl.textContent = `${currentMolecule.name} (${formulaToString(currentMolecule.formula)})`;
+    }
+
+    function formulaToString(formula) {
+      let str = "";
+      for (let atom in formula) {
+        str += atom + (formula[atom] > 1 ? formula[atom] : "");
+      }
+      return str;
+    }
+
+    function checkAnswer() {
+      let counts = {};
+      dropAtoms.forEach(a => counts[a] = (counts[a] || 0) + 1);
+
+      let correct = JSON.stringify(counts) === JSON.stringify(currentMolecule.formula);
+
+      if (correct) {
+        statusEl.textContent = "✅ ถูกต้อง! เก่งมาก 🎉";
+        statusEl.style.color = "green";
+        score += 10;
+        nextBtn.style.display = "inline-block"; 
+        checkBtn.style.display = "none"; 
+      } else {
+        statusEl.textContent = "❌ ยังไม่ถูก ลองใหม่อีกครั้งนะ";
+        statusEl.style.color = "red";
+      }
+      scoreEl.textContent = "คะแนน: " + score;
+    }
+
+    document.querySelectorAll(".atom").forEach(atom => {
+      atom.addEventListener("dragstart", e => {
+        e.dataTransfer.setData("atom", e.target.dataset.atom);
+      });
+    });
+
+    dropZone.addEventListener("dragover", e => {
+      e.preventDefault();
+    });
+
+    dropZone.addEventListener("drop", e => {
+      e.preventDefault();
+      let atom = e.dataTransfer.getData("atom");
+      dropAtoms.push(atom);
+      dropZone.innerHTML += " " + atom;
+    });
+
+    nextQuestion();
+  </script>
+</body>
+  </html>
