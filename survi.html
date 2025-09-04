@@ -27,25 +27,41 @@
     .atom {
       display: inline-block;
       font-size: 40px;
-      cursor: grab;
+      cursor: pointer;
       margin: 10px;
       padding: 10px;
+      border: 2px solid transparent;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    .atom:hover {
+      border-color: #4cafef;
+      background: #e6f7ff;
     }
 
     #drop-zone {
       border: 2px dashed #555;
       border-radius: 15px;
       width: 80%;
-      height: 200px;
+      min-height: 100px;
       margin: 20px auto;
       padding: 10px;
       background: #f9f9f9;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
     }
 
-    #drop-zone .atom-placed {
-      font-size: 28px;
-      margin: 5px;
-      display: inline-block;
+    .atom-placed {
+      font-size: 26px;
+      padding: 8px 12px;
+      border: 2px solid #4cafef;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
     }
 
     #status {
@@ -68,12 +84,20 @@
       font-size: 18px;
       border-radius: 10px;
       cursor: pointer;
-      margin-top: 15px;
+      margin: 10px 5px;
       display: none;
     }
 
     .button:hover {
       background: #45a049;
+    }
+
+    #clearBtn {
+      background: #f44336;
+    }
+
+    #clearBtn:hover {
+      background: #e53935;
     }
   </style>
 </head>
@@ -82,20 +106,22 @@
 
   <div id="game-area">
     <p>✨ สร้างโมเลกุล: <span id="target"></span></p>
+
     <div id="atoms">
-      <div class="atom" draggable="true" data-atom="H" data-symbol="💧 H">💧 H</div>
-      <div class="atom" draggable="true" data-atom="O" data-symbol="🌬️ O">🌬️ O</div>
-      <div class="atom" draggable="true" data-atom="C" data-symbol="🔥 C">🔥 C</div>
-      <div class="atom" draggable="true" data-atom="N" data-symbol="🍃 N">🍃 N</div>
+      <div class="atom" data-atom="H" data-symbol="💧 H">💧 H</div>
+      <div class="atom" data-atom="O" data-symbol="🌬️ O">🌬️ O</div>
+      <div class="atom" data-atom="C" data-symbol="🔥 C">🔥 C</div>
+      <div class="atom" data-atom="N" data-symbol="🍃 N">🍃 N</div>
     </div>
 
-    <div id="drop-zone">ลากอะตอมมาวางที่นี่ 🧩</div>
+    <div id="drop-zone">เลือกอะตอมเพื่อสร้างโมเลกุล 🧩</div>
 
     <p id="status"></p>
     <p id="score">คะแนน: 0</p>
 
     <button id="checkBtn" class="button" onclick="checkAnswer()">ตรวจคำตอบ ✅</button>
     <button id="nextBtn" class="button" onclick="nextQuestion()">โจทย์ใหม่ ▶</button>
+    <button id="clearBtn" class="button" onclick="clearAtoms()">เคลียร์ ♻</button>
   </div>
 
   <script>
@@ -107,7 +133,7 @@
     ];
 
     let currentMolecule = {};
-    let dropAtoms = [];
+    let dropAtoms = {};
     let score = 0;
 
     const targetEl = document.getElementById("target");
@@ -116,27 +142,30 @@
     const scoreEl = document.getElementById("score");
     const checkBtn = document.getElementById("checkBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const clearBtn = document.getElementById("clearBtn");
 
     function renderDropZone() {
-      if (dropAtoms.length === 0) {
-        dropZone.innerHTML = "ลากอะตอมมาวางที่นี่ 🧩";
-      } else {
-        dropZone.innerHTML = "";
-        dropAtoms.forEach(a => {
-          let span = document.createElement("span");
-          span.className = "atom-placed";
-          span.textContent = a.symbol;
-          dropZone.appendChild(span);
-        });
+      dropZone.innerHTML = "";
+      let keys = Object.keys(dropAtoms);
+      if (keys.length === 0) {
+        dropZone.textContent = "เลือกอะตอมเพื่อสร้างโมเลกุล 🧩";
+        return;
       }
+      keys.forEach(atom => {
+        let div = document.createElement("div");
+        div.className = "atom-placed";
+        div.textContent = `${atom} ×${dropAtoms[atom]}`;
+        dropZone.appendChild(div);
+      });
     }
 
     function nextQuestion() {
-      dropAtoms = [];
+      dropAtoms = {};
       renderDropZone();
       statusEl.textContent = "";
       nextBtn.style.display = "none";
       checkBtn.style.display = "inline-block";
+      clearBtn.style.display = "inline-block";
 
       currentMolecule = molecules[Math.floor(Math.random() * molecules.length)];
       targetEl.textContent = `${currentMolecule.name} (${formulaToString(currentMolecule.formula)})`;
@@ -151,16 +180,15 @@
     }
 
     function checkAnswer() {
-      let counts = {};
-      dropAtoms.forEach(a => counts[a.atom] = (counts[a.atom] || 0) + 1);
-
       let correct = true;
+
       for (let atom in currentMolecule.formula) {
-        if (counts[atom] !== currentMolecule.formula[atom]) {
+        if (dropAtoms[atom] !== currentMolecule.formula[atom]) {
           correct = false;
         }
       }
-      for (let atom in counts) {
+
+      for (let atom in dropAtoms) {
         if (!(atom in currentMolecule.formula)) {
           correct = false;
         }
@@ -172,6 +200,7 @@
         score += 10;
         nextBtn.style.display = "inline-block";
         checkBtn.style.display = "none";
+        clearBtn.style.display = "none";
       } else {
         statusEl.textContent = "❌ ยังไม่ถูก ลองใหม่อีกครั้งนะ";
         statusEl.style.color = "red";
@@ -179,23 +208,18 @@
       scoreEl.textContent = "คะแนน: " + score;
     }
 
+    function clearAtoms() {
+      dropAtoms = {};
+      renderDropZone();
+      statusEl.textContent = "";
+    }
+
     document.querySelectorAll(".atom").forEach(atom => {
-      atom.addEventListener("dragstart", e => {
-        // เก็บ id ชั่วคราวแทน
-        e.dataTransfer.setData("id", e.target.dataset.atom);
-      });
-    });
-
-    dropZone.addEventListener("dragover", e => e.preventDefault());
-
-    dropZone.addEventListener("drop", e => {
-      e.preventDefault();
-      let atomType = e.dataTransfer.getData("id");
-      let atomEl = document.querySelector(`.atom[data-atom="${atomType}"]`);
-      if (atomEl) {
-        dropAtoms.push({ atom: atomEl.dataset.atom, symbol: atomEl.dataset.symbol });
+      atom.addEventListener("click", () => {
+        let atomType = atom.dataset.atom;
+        dropAtoms[atomType] = (dropAtoms[atomType] || 0) + 1;
         renderDropZone();
-      }
+      });
     });
 
     nextQuestion();
